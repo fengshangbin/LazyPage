@@ -80,7 +80,7 @@ LazyPage.ready(function(){
 })
 ```
 7, 关于多层嵌套渲染  
-<%%> 第二层数据用&替换%, 第三层用&&, 以此类推
+<%%> 第二层数据用&替换%, 第三层用&&, 以此类推  
 script 第二层用jscript, 第三层用jjscript, 以此类推
 ```
 <script type="x-tmpl-lazypage" source="{'name':'Zhangsan1','age':21}">
@@ -100,9 +100,9 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 3, 命令行 node run 或双击run.bat  
 4，浏览器访问 http://localhost:8089/{your.html}
 # 后端整合
-1，java 请参见 https://github.com/fengshangbin/LazyPage-java
-2, .net 敬请期待
-3，node.js 敬请期待
+1，java 请参见 https://github.com/fengshangbin/LazyPage-java  
+2, .net 敬请期待  
+3，node.js 敬请期待  
 4，其他欢迎大家共建
 # 许可
 MIT许可
