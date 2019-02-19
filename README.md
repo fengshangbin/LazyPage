@@ -99,5 +99,11 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 2, 拷贝examples目录下的run.js & run.bat到需要做测试的项目跟目录中  
 3, 命令行 node run 或双击run.bat  
 4，浏览器访问 http://localhost:8089/{your.html}  
+  
+9, 关于后端整合
+1，java 请参见 https://github.com/fengshangbin/LazyPage-java
+2, .net 敬请期待
+3，node.js 敬请期待
+4，其他欢迎大家共建
 # 许可
 MIT许可
