@@ -13,21 +13,22 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 主要特点  
 1，可以引用外部模板文件  
 2，渲染数据，不用写一堆重复代码了  
-3，有对应的后端库，可以前后端同时编译数据，解决Ajax无SEO的问题  
+3，有对应的后端库，当搜索引擎爬虫爬取页面时后端编译数据并返回最终结果，解决Ajax无SEO的问题  
 4，降低服务器压力，减少服务器宽带占用，前端仅需请求静态结构页面和数据，由前端渲染数据并展现结果
+5，拥有“懒编译”模式，降低首屏Dom复杂度
 # 如何使用
 引用lazypage.js到页面
 ```
 <script src="js/lazypage.js"></script>
 ```
-渲染数据
+渲染数据  
 1，静态数据，无外部模板
 ```
 <script type="x-tmpl-lazypage" source="{'name':'Zhangsan','age':20}}">
 	<p>Hello, my name is <%=name%>. I'm <%=age%> years old.</p>
 </script>
 ```
-Lazypage使用了百度前端模板渲染的JS  
+注：Lazypage使用了百度前端模板渲染的JS  
 <%var name="Lisi"%>执行JS语句  
 <%=name%>输出变量  
 更多详情http://baidufe.github.io/BaiduTemplate/  
@@ -35,3 +36,36 @@ Lazypage使用了百度前端模板渲染的JS
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" src="include/_body.html"></script>
 ```
+3, 懒编译
+```
+<script type="x-tmpl-lazypage" source="cgi/person.json" lazy="true" id="lazy-block">
+	<p>Hello, my name is <%=name%>. I'm <%=age%> years old.</p>
+</script>
+```
+当需要编译这个节点时调用
+```
+var person = document.getElementById("lazy-block");
+LazyPage.runBlock(person);
+```
+4, 依赖编译
+有时B模块需要A模块的数据，这时B模块就依赖A模块了
+```
+<script type="x-tmpl-lazypage" source="cgi/listA.json" id="blockA">
+	<p>list A count:<%=count%></p>
+</script>
+<script type="x-tmpl-lazypage" source="cgi/listB.json" wait="blockA">
+	<p>list B count:<%=count%></p>
+	<p>list total count:<%=count+{@blockA.count}%></p>
+</script>
+```
+注：Lazypage的数据源统一使用json格式，使用 {@被依赖模块ID+引用数据} 来获取被依赖模块的数据  
+5, 请求数据接口参数
+```
+<script type="x-tmpl-lazypage" source="cgi/person.json" wait="blockA" ajax-type="post" ajax-data="id1=1&id2={&id}&id3={@blockA.count}">
+	<p>Hello4, my name is <%=name%>. I'm <%=age%> years old.</p>
+</script>
+```
+ajax-type 接口访问方式 get/post 默认get  
+ajax-data 接口参数，key=value, &隔开  
+{&id}获取当前地址栏参数id
+{@blockA.count}获取依赖模块数据
