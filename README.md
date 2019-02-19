@@ -1,6 +1,7 @@
 # LazyPage
 LazyPage make you have easy and lazy front develop, and fully decoupled front-end and back-end development  
 LazyPage 让前端开发更简洁，彻底解耦前后端开发
+GitHub Pages: https://github.com/fengshangbin/LazyPage
 # 现实问题
 两种常用开发模式  
 1，前端做静态页面，后端整合成JSP/CSHTML等前后端混合代码  
@@ -92,3 +93,11 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 	</jscript>
 </script>
 ```
+8, 关于前端测试  
+由于支持加载外部模板，传统的双击测试file://x.x.html会跨域报错，所以需要搭建一个简易的http环境  
+1，安装node.js  
+2, 拷贝examples目录下的run.js & run.bat到需要做测试的项目跟目录中  
+3, 命令行 node run 或双击run.bat  
+4，浏览器访问 http://localhost:8089/{your.html}  
+# 许可
+MIT许可
