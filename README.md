@@ -24,7 +24,7 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 渲染数据  
 1，静态数据，无外部模板
 ```
-<script type="x-tmpl-lazypage" source="{'name':'Zhangsan','age':20}}">
+<script type="x-tmpl-lazypage" source="{'name':'Zhangsan','age':20}">
 	<p>Hello, my name is <%=name%>. I'm <%=age%> years old.</p>
 </script>
 ```
@@ -32,6 +32,7 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 <%var name="Lisi"%>执行JS语句  
 <%=name%>输出变量  
 更多详情http://baidufe.github.io/BaiduTemplate/  
+  
 2，外部数据，外部模板
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" src="include/_body.html"></script>
@@ -48,7 +49,7 @@ var person = document.getElementById("lazy-block");
 LazyPage.runBlock(person);
 ```
 4, 依赖编译
-有时B模块需要A模块的数据，这时B模块就依赖A模块了
+有时B模块需要A模块的数据，这时B模块就依赖A模块了, 用wait属性表示依赖关系，多个依赖用空格分隔
 ```
 <script type="x-tmpl-lazypage" source="cgi/listA.json" id="blockA">
 	<p>list A count:<%=count%></p>
@@ -59,6 +60,7 @@ LazyPage.runBlock(person);
 </script>
 ```
 注：Lazypage的数据源统一使用json格式，使用 {@被依赖模块ID+引用数据} 来获取被依赖模块的数据  
+  
 5, 请求数据接口参数
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" wait="blockA" ajax-type="post" ajax-data="id1=1&id2={&id}&id3={@blockA.count}">
@@ -67,5 +69,26 @@ LazyPage.runBlock(person);
 ```
 ajax-type 接口访问方式 get/post 默认get  
 ajax-data 接口参数，key=value, &隔开  
-{&id}获取当前地址栏参数id
-{@blockA.count}获取依赖模块数据
+{&id}获取当前地址栏参数id  
+{@blockA.count}获取依赖模块数据  
+  
+6, 如何监听Dom渲染完成
+```
+LazyPage.ready(function(){
+	//your js code
+})
+```
+7, 关于多层嵌套渲染  
+<%%> 第二层数据用&替换%, 第三层用&&, 以此类推
+script 第二层用jscript, 第三层用jjscript, 以此类推
+```
+<script type="x-tmpl-lazypage" source="{'name':'Zhangsan1','age':21}">
+	<p>Hello1, my name is <%=name%>. I'm <%=age%> years old.</p>
+	<jscript type="x-tmpl-lazypage" source="{'name':'Zhangsan2','age':22}">
+		<p>Hello2, my name is <&=name&>. I'm <&=age&> years old.</p>
+		<jjscript type="x-tmpl-lazypage" source="{'name':'Zhangsan3','age':23}">
+			<p>Hello3, my name is <&&=name&&>. I'm <&&=age&&> years old.</p>
+		</jjscript>
+	</jscript>
+</script>
+```
