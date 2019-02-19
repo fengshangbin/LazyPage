@@ -93,13 +93,12 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 	</jscript>
 </script>
 ```
-8, 关于前端测试  
+# 关于前端测试  
 由于支持加载外部模板，传统的双击测试file://x.x.html会跨域报错，所以需要搭建一个简易的http环境  
 1，安装node.js  
 2, 拷贝examples目录下的run.js & run.bat到需要做测试的项目跟目录中  
 3, 命令行 node run 或双击run.bat  
-4，浏览器访问 http://localhost:8089/{your.html}  
-  
+4，浏览器访问 http://localhost:8089/{your.html}
 # 后端整合
 1，java 请参见 https://github.com/fengshangbin/LazyPage-java
 2, .net 敬请期待
