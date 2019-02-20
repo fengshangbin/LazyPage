@@ -15,15 +15,15 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 1，可以引用外部模板文件  
 2，渲染数据，不用写一堆重复代码了  
 3，有对应的后端库，当搜索引擎爬虫爬取页面时后端编译数据并返回最终结果，解决Ajax无SEO的问题  
-4，降低服务器压力，减少服务器宽带占用，前端仅需请求静态结构页面和数据，由前端渲染数据并展现结果
+4，降低服务器压力，减少服务器宽带占用，前端仅需请求静态结构页面和数据，由前端渲染数据并展现结果  
 5，拥有“懒编译”模式，降低首屏Dom复杂度
 # 如何使用
 引用lazypage.js到页面
 ```
 <script src="js/lazypage.js"></script>
 ```
-渲染数据  
-1，静态数据，无外部模板
+### 1. 渲染数据  
+静态数据，无外部模板
 ```
 <script type="x-tmpl-lazypage" source="{'name':'Zhangsan','age':20}">
 	<p>Hello, my name is <%=name%>. I'm <%=age%> years old.</p>
@@ -34,11 +34,11 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 <%=name%>输出变量  
 更多详情http://baidufe.github.io/BaiduTemplate/  
   
-2，外部数据，外部模板
+外部数据，外部模板
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" src="include/_body.html"></script>
 ```
-3, 懒编译
+### 2. 懒编译
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" lazy="true" id="lazy-block">
 	<p>Hello, my name is <%=name%>. I'm <%=age%> years old.</p>
@@ -47,9 +47,12 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 当需要编译这个节点时调用
 ```
 var person = document.getElementById("lazy-block");
-LazyPage.runBlock(person);
+LazyPage.runBlock(person, function(){
+	console.log("lazy-block render over")
+});
 ```
-4, 依赖编译
+runBlock方法，第二个参数为回调函数，默认为空
+### 3. 依赖编译
 有时B模块需要A模块的数据，这时B模块就依赖A模块了, 用wait属性表示依赖关系，多个依赖用空格分隔
 ```
 <script type="x-tmpl-lazypage" source="cgi/listA.json" id="blockA">
@@ -62,7 +65,7 @@ LazyPage.runBlock(person);
 ```
 注：Lazypage的数据源统一使用json格式，使用 {@被依赖模块ID+引用数据} 来获取被依赖模块的数据  
   
-5, 请求数据接口参数
+### 4. 请求数据接口参数
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" wait="blockA" ajax-type="post" ajax-data="id1=1&id2={&id}&id3={@blockA.count}">
 	<p>Hello4, my name is <%=name%>. I'm <%=age%> years old.</p>
@@ -73,13 +76,13 @@ ajax-data 接口参数，key=value, &隔开
 {&id}获取当前地址栏参数id  
 {@blockA.count}获取依赖模块数据  
   
-6, 如何监听Dom渲染完成
+### 5. 如何监听Dom渲染完成
 ```
 LazyPage.ready(function(){
 	//your js code
 })
 ```
-7, 关于多层嵌套渲染  
+### 6. 关于多层嵌套渲染  
 <%%> 第二层数据用&替换%, 第三层用&&, 以此类推  
 script 第二层用jscript, 第三层用jjscript, 以此类推
 ```
@@ -94,14 +97,14 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 </script>
 ```
 # 关于前端测试  
-由于支持加载外部模板，传统的双击测试file://x.x.html会跨域报错，所以需要搭建一个简易的http环境  
+由于支持加载外部模板，传统的双击测试file://xx/x.html会跨域报错，所以需要搭建一个简易的http环境  
 1，安装node.js  
 2, 拷贝examples目录下的run.js & run.bat到需要做测试的项目跟目录中  
 3, 命令行 node run 或双击run.bat  
 4，浏览器访问 http://localhost:8089/{your.html}
 # 后端整合
 1，java 请参见 https://github.com/fengshangbin/LazyPage-java  
-2, .net 敬请期待  
+2, c# 敬请期待  
 3，node.js 敬请期待  
 4，其他欢迎大家共建
 # 许可

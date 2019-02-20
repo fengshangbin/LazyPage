@@ -27,8 +27,10 @@ function renderDom(block){
 			checkBlocks();
 		});
 	}
+	if(block.callback!=null)block.callback();
 	block.html=null;
 	block.data=null;
+	block.callback=null;
 	block=null;
 	checkBlocks();
 }
@@ -90,10 +92,11 @@ function addModeData(block, data){
 	}
 }
 
-function runBlock(block){
+function runBlock(block, callback){
 	let src = block.getAttribute("src");
 	let source = block.getAttribute("source");
 	let matchJson = /(^\{(.*?)\}$)|(^\[(.*?)\]$)/;
+	block.callback = callback;
 	if(source!=null&&source!=""){
 		if(matchJson.test(source)){
 			source=source.replace(/'/g,"\"");
