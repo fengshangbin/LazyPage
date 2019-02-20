@@ -98,10 +98,10 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 ```
 ### 7. 模板中JS脚本规则
 1, 因为模板脚本需要同时在后端编译，所以模板脚本不可以有Dom,Window的相关操作。  
-如<%=window.innerWidth%>是不允许的
+如<%=window.innerWidth%>是不允许的  
 2, 模板脚本中的函数调用，需要在后端注册调用函数所在的脚本文件。  
-如examples的日期格式化函数dataFormat，引用了js/format.js脚本文件，
-需要同时在后端注册这个脚本文件
+如examples的日期格式化函数dataFormat，引用了js/format.js脚本文件，  
+需要同时在后端注册这个脚本文件  
 例java端代码
 ```java
 String rootPath = context.getRealPath("");
