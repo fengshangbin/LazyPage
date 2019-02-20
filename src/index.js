@@ -153,6 +153,6 @@ readyDom(function(){
 })
 function ready(fn){readyLazy.bind(fn);}
 let data = {};
-if(window&&window.innerWidth>1)document.cookie="LazyPageAjax=1";
+if(window&&window.innerWidth>1)document.cookie="LazyPageSpider=0";
 export {baidu,ready,runBlock,data};
 //module.exports = baidu;

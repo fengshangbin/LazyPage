@@ -22,7 +22,7 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 ```
 <script src="js/lazypage.js"></script>
 ```
-### 1. 渲染数据  
+### 1. 渲染数据
 静态数据，无外部模板
 ```
 <script type="x-tmpl-lazypage" source="{'name':'Zhangsan','age':20}">
@@ -82,7 +82,7 @@ LazyPage.ready(function(){
 	//your js code
 })
 ```
-### 6. 关于多层嵌套渲染  
+### 6. 关于多层嵌套渲染
 <%%> 第二层数据用&替换%, 第三层用&&, 以此类推  
 script 第二层用jscript, 第三层用jjscript, 以此类推
 ```
@@ -96,7 +96,21 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 	</jscript>
 </script>
 ```
-# 关于前端测试  
+### 7. 模板中JS脚本规则
+1, 因为模板脚本需要同时在后端编译，所以模板脚本不可以有Dom,Window的相关操作。  
+如<%=window.innerWidth%>是不允许的
+2, 模板脚本中的函数调用，需要在后端注册调用函数所在的脚本文件。  
+如examples的日期格式化函数dataFormat，引用了js/format.js脚本文件，
+需要同时在后端注册这个脚本文件
+例java端代码
+```java
+String rootPath = context.getRealPath("");
+LazyPage.addJsFile(rootPath+"/js/format.js");
+```
+### 8. 何时开启后端渲染
+后端通过如果Cookie中没有包含LazyPageSpider项，则当前为搜索引擎爬虫访问  
+所以正常的浏览器第一次访问也会开启后端渲染的
+# 关于前端测试
 由于支持加载外部模板，传统的双击测试file://xx/x.html会跨域报错，所以需要搭建一个简易的http环境  
 1, 安装node.js  
 2, 拷贝examples目录下的run.js & run.bat到需要做测试的项目跟目录中  
