@@ -38,7 +38,9 @@ LazyPage是一个前端框架，帮助前端人员高质量高效率完成前端
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" src="include/_body.html"></script>
 ```
-### 2. 懒编译
+### 2. 外部模板文件命名
+统一使用下划线开头， 如_body.html
+### 3. 懒编译
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" lazy="true" id="lazy-block">
 	<p>Hello, my name is <%=name%>. I'm <%=age%> years old.</p>
@@ -52,7 +54,7 @@ LazyPage.runBlock(person, function(){
 });
 ```
 runBlock方法，第二个参数为回调函数，默认为空
-### 3. 依赖编译
+### 4. 依赖编译
 有时B模块需要A模块的数据，这时B模块就依赖A模块了, 用wait属性表示依赖关系，多个依赖用空格分隔
 ```
 <script type="x-tmpl-lazypage" source="cgi/listA.json" id="blockA">
@@ -65,7 +67,7 @@ runBlock方法，第二个参数为回调函数，默认为空
 ```
 注：Lazypage的数据源统一使用json格式，使用 {@被依赖模块ID+引用数据} 来获取被依赖模块的数据  
   
-### 4. 请求数据接口参数
+### 5. 请求数据接口参数
 ```
 <script type="x-tmpl-lazypage" source="cgi/person.json" wait="blockA" ajax-type="post" ajax-data="id1=1&id2={&id}&id3={@blockA.count}">
 	<p>Hello4, my name is <%=name%>. I'm <%=age%> years old.</p>
@@ -76,13 +78,13 @@ ajax-data 接口参数，key=value, &隔开
 {&id}获取当前地址栏参数id  
 {@blockA.count}获取依赖模块数据  
   
-### 5. 如何监听Dom渲染完成
+### 6. 如何监听Dom渲染完成
 ```
 LazyPage.ready(function(){
 	//your js code
 })
 ```
-### 6. 关于多层嵌套渲染
+### 7. 关于多层嵌套渲染
 <%%> 第二层数据用&替换%, 第三层用&&, 以此类推  
 script 第二层用jscript, 第三层用jjscript, 以此类推
 ```
@@ -96,7 +98,7 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 	</jscript>
 </script>
 ```
-### 7. 模板中JS脚本规则
+### 8. 模板中JS脚本规则
 1, 因为模板脚本需要同时在后端编译，所以模板脚本不可以有Dom,Window的相关操作。  
 如<%=window.innerWidth%>是不允许的  
 2, 模板脚本中的函数调用，需要在后端注册调用函数所在的脚本文件。  
@@ -107,7 +109,7 @@ script 第二层用jscript, 第三层用jjscript, 以此类推
 String rootPath = context.getRealPath("");
 LazyPage.addJsFile(rootPath+"/js/format.js");
 ```
-### 8. 何时开启后端渲染
+### 9. 何时开启后端渲染
 后端通过如果Cookie中没有包含LazyPageSpider项，则当前为搜索引擎爬虫访问  
 所以正常的浏览器第一次访问也会开启后端渲染的
 # 关于前端测试
