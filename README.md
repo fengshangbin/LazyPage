@@ -115,8 +115,11 @@ LazyPage.addJsFile(rootPath+"/js/format.js");
 1, 安装node.js  
 2, 拷贝examples目录下的run.js & run.bat到需要做测试的项目跟目录中  
 3, 命令行 node run 或双击run.bat  
-4, 浏览器访问 http://localhost:8089/{your.html}
+4, 浏览器访问 http://localhost:8089/{your.html}  
+LazyPage不需要和后端整合即可开始前端测试
 # 后端整合
+LazyPage的后端整合只需简单两部  
+第一步引用LazyPage后端对应语言的类库，第二步调用LazyPage初始化函数LazyPage.init()  
 1, java 请参见 https://github.com/fengshangbin/LazyPage-java  
 2, c# 敬请期待  
 3, node.js 敬请期待  
