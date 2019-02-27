@@ -7,6 +7,7 @@
 </head>
 
 <body>
+你好1
 <script type="x-tmpl-lazypage" source="cgi/list.json" id="block1">
 	<p>date: <%=dataFormat("dd-MM-yyyy hh:mm:ss TT", 1550487329)%>, number: <%=toThousands(123456789.123)%></p>
 	<p>class name script: <%=team%></p>
@@ -32,7 +33,7 @@
 		<%=i%>: <%=temp[i]%><br/>
 	<%}%>
 </script>
-<script type="x-tmpl-lazypage" source="{'name':'Krasimir Tsonev','profile':{'age':2}}" src="include/_body.html"></script>
+<script type="x-tmpl-lazypage" source="{'name':'Krasimir Tsonev','profile':{'age':2}}" src="include/_body.html?v=haha"></script>
 <script src="js/lazypage.js"></script>
 <script src="js/format.js"></script>
 <script>

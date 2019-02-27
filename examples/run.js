@@ -28,22 +28,82 @@ let mimetype = {
   'xml': 'text/xml'
 };
 
+// 遍历本地目录
+let root = path.join("");
+let htmlPaths = new Set();
+let map = new Map();
+readDirSync(root);
+function readDirSync(pathStr){
+	let pa = fs.readdirSync(pathStr);
+	pa.forEach(function(ele,index){
+		let filePath = path.join(pathStr,ele);
+		let info = fs.statSync(filePath);
+		if(info.isDirectory()){
+			readDirSync(filePath);
+		}else{
+			let start = ele.substring(0,1);
+			if(start != "_"){
+				var ext = path.extname(ele);
+				if(ext==".html"){
+					let reg = new RegExp(path.sep+path.sep, "g");
+					let realPath = "/"+filePath.replace(reg, "/");
+					let routePath = realPath.replace("-.html", "");
+					routePath = routePath.replace(/\+/g, "/");
+					routePath = routePath.replace(/\$/g, "([^/]*?)");
+					
+					if(routePath != realPath){
+						map.set("^"+routePath+"$", realPath);
+					}else{
+						htmlPaths.add(realPath);
+					}
+				}
+			}
+			
+		}	
+	})
+}
+//console.log(htmlPaths);
+//console.log(map);
 // 创建server
 let server = http.createServer(function (request, response) {
 	var pathname = url.parse(request.url).pathname;
-	var realPath = path.join('', pathname).substring(1);
-	//console.log(realPath);
+	var realPath = path.join("", pathname.substring(1));
+	var appentScript;
 	var ext = path.extname(realPath);
-	ext = ext ? ext.slice(1) : 'unknown';
+	ext = ext.length>0 ? ext.slice(1) : 'unknown';
+	if(ext!="unknown" && ext!="html"){
+		
+	}else if(htmlPaths.has(pathname)){
+		
+	}else{
+		for (let key of map.keys()) {
+        	//console.log(key);
+			let reg = new RegExp(key, "i");
+			if(reg.test(pathname)){
+				//console.log(pathname, key, reg.exec(pathname));
+				let group = reg.exec(pathname);
+				realPath = map.get(key).substring(1);
+				ext="html";
+				//console.log(group.length);
+				if(group.length>1){
+					let pathParams = group.slice(1,group.lengths);
+					appentScript = "<script>LazyPage.pathParams=[\""+pathParams.join("\",\"")+"\"]</script>\n";
+					//console.log(appentScript);
+				}
+			}
+    	}
+	}
+	//console.log(realPath);
 	fs.exists(realPath, function (exists) {
 		if (!exists) {
 			response.writeHead(404, {
 				'Content-Type': 'text/plain'
 			});
+
 			response.write('This request URL ' + pathname + ' was not found on this server.');
 			response.end();
 		} else {
-			fs.readFile(realPath, 'binary', function (err, file) {
+			fs.readFile(realPath, appentScript==null?'binary':"utf8", function (err, file) {
 				if (err) {
 					response.writeHead(500, {
 						'Content-Type': 'text/plain'
@@ -54,7 +114,15 @@ let server = http.createServer(function (request, response) {
 					response.writeHead(200, {
 						'Content-Type': contentType
 					});
-					response.write(file, 'binary');
+					if(appentScript!=null){
+						let bodyEnd = file.lastIndexOf("</body>");
+						if(bodyEnd>0){
+							file = file.substring(0, bodyEnd)+appentScript+file.substring(bodyEnd);
+						}else{
+							file += "\n"+appentScript;
+						}
+					}
+					response.write(file, appentScript==null?'binary':"utf8");
 					response.end();
 				}
 			});

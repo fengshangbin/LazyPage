@@ -108,6 +108,9 @@ function runBlock(block, callback){
 			ajaxData=ajaxData.replace(/{&(.*?)}/g, function(match, p1, offset){
 				return getQueryString(p1);
 			});
+			ajaxData=ajaxData.replace(/{\$(.*?)}/g, function(match, p1, offset){
+				return eval("LazyPage.pathParams["+p1+"]");
+			});
 			ajaxData=ajaxData.replace(/{@(.*?)}/g, function(match, p1, offset){
 				return eval("LazyPage.data."+p1);
 			});
@@ -121,7 +124,9 @@ function runBlock(block, callback){
 				  renderDom(block);
 			  }, 
 			  error:function(e){ 
-				console.log("error",e);
+				  console.log("error",e);
+				  block.setAttribute("type","x-tmpl-lazypage-error");
+				  checkBlocks();
 			  } 
 			});
 		}
@@ -133,11 +138,13 @@ function runBlock(block, callback){
 		ajax({
 		  url:src,
 		  success:function(msg){
-			block.html = msg;
-			renderDom(block);
+		  	  block.html = msg;
+		      renderDom(block);
 		  }, 
 		  error:function(e){ 
-			console.log("error",e);
+		      console.log("error",e);
+			  block.setAttribute("type","x-tmpl-lazypage-error");
+			  checkBlocks();
 		  } 
 		});
 	}else{
@@ -153,6 +160,10 @@ readyDom(function(){
 })
 function ready(fn){readyLazy.bind(fn);}
 let data = {};
-if(window&&window.innerWidth>1)document.cookie="LazyPageSpider=0";
+if(window&&window.innerWidth>1){
+	var exdate=new Date()
+	exdate.setDate(exdate.getDate()+365);
+	document.cookie="LazyPageSpider=0;expires=" + exdate.toGMTString() + ";path=/";;
+}
 export {baidu,ready,runBlock,data};
 //module.exports = baidu;
