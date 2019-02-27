@@ -77,7 +77,7 @@ runBlock方法，第二个参数为回调函数，默认为空
 ajax-type 接口访问方式 get/post 默认get  
 ajax-data 接口参数，key=value, &隔开  
 {&id}获取当前地址栏参数id  
-{$0}获取当前地址栏路径参数
+{$0}获取当前地址栏路径参数  
 {@blockA.count}获取依赖模块数据  
   
 ### 6. 如何监听Dom渲染完成
@@ -124,7 +124,7 @@ LazyPage.addJsFile(rootPath+"/js/format.js");
 1, 安装node.js  
 2, 拷贝examples目录下的run.js & run.bat到需要做测试的项目跟目录中  
 3, 命令行 node run 或双击run.bat  
-4, 浏览器访问 http://localhost:8089/{your.html}  
+4, 浏览器访问 http://localhost:8089/{your path}  
 LazyPage不需要和后端整合即可开始前端测试
 # 后端整合
 LazyPage的后端整合只需简单两部  
