@@ -1,6 +1,6 @@
 # LazyPage
 LazyPage make you have easy and lazy front develop, and fully decoupled front-end and back-end development  
-LazyPage 让前端开发更简洁，彻底解耦前后端开发
+LazyPage 让前端开发更简洁，彻底解耦前后端开发  
 GitHub Pages: https://github.com/fengshangbin/LazyPage
 # 现实问题
 两种常用开发模式  
