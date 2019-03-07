@@ -9,7 +9,7 @@
 <body>
 你好1
 <script type="x-tmpl-lazypage" source="cgi/list.json" id="block1">
-	<p>date: <%=dataFormat("dd-MM-yyyy hh:mm:ss TT", 1550487329)%>, number: <%=toThousands(123456789.123)%></p>
+	<p>date: <%=format.dataFormat("dd-MM-yyyy hh:mm:ss TT", 1550487329)%>, number: <%=format.toThousands(123456789.123)%></p>
 	<p>class name script: <%=team%></p>
 	<%for(var i=0; i<members.length; i++){%>
 		<p>member id: <%=members[i]%></p>

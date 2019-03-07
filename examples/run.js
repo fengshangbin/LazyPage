@@ -34,6 +34,7 @@ let htmlPaths = new Set();
 let map = new Map();
 readDirSync(root);
 function readDirSync(pathStr){
+	//var files = fs.readdirSync(pathStr)
 	let pa = fs.readdirSync(pathStr);
 	pa.forEach(function(ele,index){
 		let filePath = path.join(pathStr,ele);
@@ -41,24 +42,19 @@ function readDirSync(pathStr){
 		if(info.isDirectory()){
 			readDirSync(filePath);
 		}else{
-			let start = ele.substring(0,1);
-			if(start != "_"){
-				var ext = path.extname(ele);
-				if(ext==".html"){
-					let reg = new RegExp(path.sep+path.sep, "g");
-					let realPath = "/"+filePath.replace(reg, "/");
-					let routePath = realPath.replace("-.html", "");
-					routePath = routePath.replace(/\+/g, "/");
-					routePath = routePath.replace(/\$/g, "([^/]*?)");
-					
-					if(routePath != realPath){
-						map.set("^"+routePath+"$", realPath);
-					}else{
-						htmlPaths.add(realPath);
-					}
+			if(!ele.startsWith("_") && ele.endsWith(".html")){
+				let reg = new RegExp(path.sep+path.sep, "g");
+				let realPath = "/"+filePath.replace(reg, "/");
+				let routePath = realPath.replace("-.html", "");
+				routePath = routePath.replace(/\+/g, "/");
+				routePath = routePath.replace(/\$/g, "([^/]*?)");
+
+				if(routePath != realPath){
+					map.set("^"+routePath+"$", realPath);
+				}else{
+					htmlPaths.add(realPath);
 				}
 			}
-			
 		}	
 	})
 }
@@ -99,7 +95,6 @@ let server = http.createServer(function (request, response) {
 			response.writeHead(404, {
 				'Content-Type': 'text/plain'
 			});
-
 			response.write('This request URL ' + pathname + ' was not found on this server.');
 			response.end();
 		} else {
