@@ -128,7 +128,6 @@ LazyPage.addJsFile(rootPath+"/js/format.js");
 LazyPage不需要和后端整合即可开始前端测试
 # 后端整合
 LazyPage的后端整合只需简单两部  
-第一步引用LazyPage后端对应语言的类库，第二步调用LazyPage初始化函数LazyPage.init()  
 1, java 请参见 https://github.com/fengshangbin/LazyPage-java  
 2, node.js 请参见 https://github.com/fengshangbin/LazyPage-node.js  
 3, c# 敬请期待  
