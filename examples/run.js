@@ -62,6 +62,9 @@ function readDirSync(pathStr){
 //console.log(map);
 // 创建server
 let server = http.createServer(function (request, response) {
+	if(server.onRequest){
+		server.onRequest(request, response);
+	}
 	var pathname = url.parse(request.url).pathname;
 	var realPath = path.join("", pathname.substring(1));
 	var appentScript;
@@ -103,7 +106,9 @@ let server = http.createServer(function (request, response) {
 					response.writeHead(500, {
 						'Content-Type': 'text/plain'
 					});
-					response.end(err);
+					//console.log(err);
+					response.write(JSON.stringify(err));
+					response.end();
 				} else {
 					var contentType = mimetype[ext] || 'text/plain';
 					response.writeHead(200, {
@@ -126,6 +131,23 @@ let server = http.createServer(function (request, response) {
 });
 
 //设置监听端口
-server.listen(8089, '127.0.0.1', function () {
-	console.log('服务已经启动，访问地址为：\nhttp://127.0.0.1:8089/index.html');
+server.listen(8089, function () {
+	console.log('服务已经启动，访问地址为：\nhttp://localhost:8089/index.html');
 });
+//打开默认浏览器
+const openDefaultBrowser = function (url) {
+  var exec = require('child_process').exec;
+  console.log(process.platform)
+  switch (process.platform) {
+    case "darwin":
+      exec('open ' + url);
+      break;
+    case "win32":
+      exec('start ' + url);
+      break;
+    default:
+      exec('xdg-open', [url]);
+  }
+}
+openDefaultBrowser('http://localhost:8089/index.html')
+module.exports=server;

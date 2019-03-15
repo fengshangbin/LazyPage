@@ -3,6 +3,7 @@ var readyDom = require('./js/documentReady.js');
 var baiduRun = require('./js/baiduTemplate.js');
 var analyzeScript = require('./js/analyzeScript.js');
 var ajax = require('./js/ajax.js');
+var goto = require('./js/urlBone.js');
 
 var readyLazy = new _ready();
 var scriptTotal=0, scriptLoad=0;

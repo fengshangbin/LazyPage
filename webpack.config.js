@@ -45,5 +45,5 @@ module.exports = {
 	  ]
   },
   target: 'web',
-  mode: "development" //"production"
+  mode: "production"
 };
