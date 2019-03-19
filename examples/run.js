@@ -70,10 +70,14 @@ let server = http.createServer(function (request, response) {
 	var appentScript;
 	var ext = path.extname(realPath);
 	ext = ext.length>0 ? ext.slice(1) : 'unknown';
+	console.log(pathname);
 	if(ext!="unknown" && ext!="html"){
 		
 	}else if(htmlPaths.has(pathname)){
 		
+	}else if(pathname === '/' && htmlPaths.has("/index.html")){
+		realPath = "index.html";
+		ext="html";
 	}else{
 		for (let key of map.keys()) {
         	//console.log(key);
@@ -86,7 +90,7 @@ let server = http.createServer(function (request, response) {
 				//console.log(group.length);
 				if(group.length>1){
 					let pathParams = group.slice(1,group.lengths);
-					appentScript = "<script>LazyPage.pathParams=[\""+pathParams.join("\",\"")+"\"]</script>\n";
+					appentScript = "<script>LazyPage.pathParams=[\""+pathParams.join("\",\"")+"\"];LazyPage.pathReg='"+key+"';</script>\n";
 					//console.log(appentScript);
 				}
 			}
@@ -132,12 +136,12 @@ let server = http.createServer(function (request, response) {
 
 //设置监听端口
 server.listen(8089, function () {
-	console.log('服务已经启动，访问地址为：\nhttp://localhost:8089/index.html');
+	console.log('服务已经启动，访问地址为：\nhttp://localhost:8089');
 });
 //打开默认浏览器
 const openDefaultBrowser = function (url) {
   var exec = require('child_process').exec;
-  console.log(process.platform)
+  //console.log(process.platform)
   switch (process.platform) {
     case "darwin":
       exec('open ' + url);
@@ -149,5 +153,5 @@ const openDefaultBrowser = function (url) {
       exec('xdg-open', [url]);
   }
 }
-openDefaultBrowser('http://localhost:8089/index.html')
+openDefaultBrowser('http://localhost:8089')
 module.exports=server;

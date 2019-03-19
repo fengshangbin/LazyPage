@@ -93,6 +93,7 @@ function serveStatic (root, options) {
 				if(!ele.startsWith("_") && ele.endsWith(".html")){
 					let reg = new RegExp(pathNode.sep+pathNode.sep, "g");
 					let realPath = filePath.substring(rootLen).replace(reg, "/");
+					//console.log(realPath);
 					let routePath = realPath.replace("-.html", "");
 					routePath = routePath.replace(/\+/g, "/");
 					routePath = routePath.replace(/\$/g, "([^/]*?)");
@@ -139,9 +140,14 @@ function serveStatic (root, options) {
 	ext = ext.length>0 ? ext.slice(1) : 'unknown';
 	//console.log("ext: "+ext);
 	//console.log("path: "+path);
-	if((htmlPaths.has(path) || path === '/')){
+	/*if(htmlPaths.has(path)){// || path === '/'
 		
-	}else if(ext=="unknown" || ext=="html"){
+	}else if(ext=="unknown" || ext=="html"){*/
+	if(ext!="unknown" && ext!="html"){
+		
+	}else if(htmlPaths.has(path) || (path === '/' && htmlPaths.has("/index.html"))){
+		
+	}else{
 		for (let key of map.keys()) {
 			//console.log(key);
 			let reg = new RegExp(key, "i");
@@ -152,7 +158,7 @@ function serveStatic (root, options) {
 				//console.log(group.length);
 				if(group.length>1){
 					pathParams = group.slice(1,group.lengths);
-					appentScript = "<script>LazyPage.pathParams=[\""+pathParams.join("\",\"")+"\"]</script>\n";
+					appentScript = "<script>LazyPage.pathParams=[\""+pathParams.join("\",\"")+"\"];LazyPage.pathReg='"+key+"';</script>\n";
 					//console.log(appentScript);
 				}
 			}

@@ -4,6 +4,7 @@ var baiduRun = require('./js/baiduTemplate.js');
 var analyzeScript = require('./js/analyzeScript.js');
 var ajax = require('./js/ajax.js');
 var goto = require('./js/urlBone.js');
+var css = require('./css/lazypage.css');
 
 var readyLazy = new _ready();
 var scriptTotal=0, scriptLoad=0;
@@ -166,5 +167,5 @@ if(window&&window.innerWidth>1){
 	exdate.setDate(exdate.getDate()+365);
 	document.cookie="LazyPageSpider=0;expires=" + exdate.toGMTString() + ";path=/";;
 }
-export {ready,runBlock,data};
+export {ready,runBlock,checkBlocks,data};
 //module.exports = baidu;

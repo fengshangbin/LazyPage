@@ -4,22 +4,28 @@ function ajax(){
     url:arguments[0].url || "", 
     async:arguments[0].async || "true", 
     data:arguments[0].data || null, 
-    dataType:arguments[0].dataType || "text", 
-    contentType:arguments[0].contentType || "application/x-www-form-urlencoded", 
+    dataType:arguments[0].dataType || "text",
+	header:arguments[0].header || null,
+    contentType:arguments[0].contentType || "application/x-www-form-urlencoded",
     beforeSend:arguments[0].beforeSend || function(){}, 
     success:arguments[0].success || function(){}, 
     error:arguments[0].error || function(){} 
   } 
   ajaxData.beforeSend() 
-  var xhr = createxmlHttpRequest();  
+  var xhr = createxmlHttpRequest();
   xhr.responseType = ajaxData.dataType;
   //ajaxData.data = convertData(ajaxData.data);
   if(ajaxData.type.toLowerCase()=="get" && ajaxData.data!=null && ajaxData.data!=""){
 	  ajaxData.url+=ajaxData.url.indexOf("?")>0?"&":"?";
 	  ajaxData.url+=ajaxData.data;
   }
-  xhr.open(ajaxData.type,ajaxData.url,ajaxData.async);  
-  xhr.setRequestHeader("Content-Type",ajaxData.contentType);  
+  xhr.open(ajaxData.type,ajaxData.url,ajaxData.async);
+  xhr.setRequestHeader("Content-Type",ajaxData.contentType);
+  if(ajaxData.header!=null){
+	  for(var key in ajaxData.header){
+		  xhr.setRequestHeader(key, ajaxData.header[key]);
+	  }
+  }
   xhr.send(ajaxData.type.toLowerCase()=="post" && ajaxData.data!=null ? ajaxData.data : null);  
   xhr.onreadystatechange = function() {  
     if (xhr.readyState == 4) {  

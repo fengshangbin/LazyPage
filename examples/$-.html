@@ -7,13 +7,13 @@
 </head>
 
 <body>
-你好3
+你好30
 <a href="a.html">a.html</a>
 <a href="b.html?id=3">b.html</a>
 <div id="/" class="page in">hello</div>
 <div id="a.html" class="page out">a.html</div>
 <div id="b.html" class="page out">b.html</div>
-<script type="x-tmpl-lazypage" source="../cgi/list.json" id="block1">
+<script type="x-tmpl-lazypage" source="cgi/list.json" id="block1">
 	<p>date: <%=format.dataFormat("dd-MM-yyyy hh:mm:ss TT", 1550487329)%>, number: <%=format.toThousands(123456789.123)%></p>
 	<p>class name script: <%=team%></p>
 	<%for(var i=0; i<members.length; i++){%>
@@ -25,22 +25,22 @@
 		<%}%>
 	<%}%>
 </script> 
-<script type="x-tmpl-lazypage" source="../cgi/person.json" lazy="true" id="lazy-block">
+<script type="x-tmpl-lazypage" source="cgi/person.json" lazy="true" id="lazy-block">
 	<p>Hello2, my name is <%=name%>. I'm <%=profile.age%> years old.</p>
 </script>
-<script type="x-tmpl-lazypage" source="../cgi/person.json" wait="block1" ajax-data="id={@block1.team}">
+<script type="x-tmpl-lazypage" source="cgi/person.json" wait="block1" ajax-data="id={@block1.team}">
 	<p>Hello3, my name is <%=name%>. I'm <%=profile.age%> years old.<%={@block1.team}.length%>.</p>
 </script>
-<script type="x-tmpl-lazypage" source="../cgi/person.json" ajax-data="id={&id}">
+<script type="x-tmpl-lazypage" source="cgi/person.json" ajax-data="id={&id}">
 	<%var temp=[3,2,1];%>
 	<p>Hello4, my name is <%=name%>. I'm <%=profile.age%> years old.</p>
 	<%for(var i=0; i<temp.length; i++){%>
 		<%=i%>: <%=temp[i]%><br/>
 	<%}%>
 </script>
-<script type="x-tmpl-lazypage" source="{'name':'Krasimir Tsonev','profile':{'age':2}}" src="../include/_body.html"></script>
-<script src="../dist/lazypage.js"></script>
-<script src="../js/format.js"></script>
+<script type="x-tmpl-lazypage" source="{'name':'Krasimir Tsonev','profile':{'age':2}}" src="include/_body.html"></script>
+<script src="dist/lazypage.js"></script>
+<script src="js/format.js"></script>
 <script>
 	LazyPage.ready(function(){
 		var person = document.getElementById("lazy-block");

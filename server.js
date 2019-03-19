@@ -24,7 +24,6 @@ var server = app.listen(8085, function () {
 //打开默认浏览器
 const openDefaultBrowser = function (url) {
   var exec = require('child_process').exec;
-  console.log(process.platform)
   switch (process.platform) {
     case "darwin":
       exec('open ' + url);
@@ -36,4 +35,4 @@ const openDefaultBrowser = function (url) {
       exec('xdg-open', [url]);
   }
 }
-openDefaultBrowser('http://localhost:8085/')
+openDefaultBrowser('http://localhost:8085')
