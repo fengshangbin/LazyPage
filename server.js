@@ -7,32 +7,33 @@ var serverStatic = require('./server.static');
 
 var compiler = webpack(webpackConfig);
 var devMiddleware = webpackDevMiddleware(compiler, {
-		noInfo: true,
-		publicPath: webpackConfig.output.publicPath
-	});
-var hotMiddleware = webpackHotMiddleware(compiler)
+  noInfo: true,
+  publicPath: webpackConfig.output.publicPath
+});
+var hotMiddleware = webpackHotMiddleware(compiler);
 
 var app = express();
 app.use(devMiddleware);
 app.use(hotMiddleware);
-app.use(serverStatic.static("examples"));
+app.use(serverStatic.filter('examples'));
+app.use(express.static('examples'));
 
-var server = app.listen(8085, function () {
-  console.log("LazyPage node.js测试，访问地址为 http://localhost:8085/");
-})
+var server = app.listen(8085, function() {
+  console.log('LazyPage node.js测试，访问地址为 http://localhost:8085/');
+});
 
 //打开默认浏览器
-const openDefaultBrowser = function (url) {
+const openDefaultBrowser = function(url) {
   var exec = require('child_process').exec;
   switch (process.platform) {
-    case "darwin":
+    case 'darwin':
       exec('open ' + url);
       break;
-    case "win32":
+    case 'win32':
       exec('start ' + url);
       break;
     default:
       exec('xdg-open', [url]);
   }
-}
-openDefaultBrowser('http://localhost:8085')
+};
+openDefaultBrowser('http://localhost:8085');

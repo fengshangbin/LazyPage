@@ -10,9 +10,11 @@
 你好30
 <a href="a.html">a.html</a>
 <a href="b.html?id=3">b.html</a>
-<div id="/" class="page in">hello</div>
-<div id="a.html" class="page out">a.html</div>
-<div id="b.html" class="page out">b.html</div>
+<a href="c.html">c.html</a>
+<a href="index2.html">default</a>
+<div class="lazypage in">hello2</div>
+<div id="a.html" class="lazypage out">a.html</div>
+<div id="b.html" class="lazypage out">b.html</div>
 <script type="x-tmpl-lazypage" source="cgi/list.json" id="block1">
 	<p>date: <%=format.dataFormat("dd-MM-yyyy hh:mm:ss TT", 1550487329)%>, number: <%=format.toThousands(123456789.123)%></p>
 	<p>class name script: <%=team%></p>

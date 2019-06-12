@@ -19,7 +19,7 @@
 	<%for(var i=0; i<members.length; i++){%>
 		<p>member id: <%=members[i]%></p>
 		<%if(i==0){%>
-			<jscript type="x-tmpl-lazypage" source="cgi/person.json" ajax-data="id=<%=members[i]%>">
+			<jscript type="x-tmpl-lazypage" source="../cgi/person.json" ajax-data="id=<%=members[i]%>">
 				<p>Hello1, my name is <&=name&>. I'm years old.</p>
 			</jscript>
 		<%}%>
@@ -31,7 +31,10 @@
 <script type="x-tmpl-lazypage" source="../cgi/person.json" wait="block1" ajax-data="id={@block1.team}">
 	<p>Hello3, my name is <%=name%>. I'm <%=profile.age%> years old.<%={@block1.team}.length%>.</p>
 </script>
-<script type="x-tmpl-lazypage" source="../cgi/person.json" ajax-data="id={&id}">
+<script type="x-tmpl-lazypage" source="../cgi/person.json" wait="block1" ajax-data="id={@block1.team}">
+	<p>Hello3-2, my name is <%=name%>. I'm <%=profile.age%> years old.<%={@block1.team}.length%>.</p>
+</script>
+<script type="x-tmpl-lazypage" source="../cgi/person.json" ajax-data="id={&id}&id2={$0}">
 	<%var temp=[3,2,1];%>
 	<p>Hello4, my name is <%=name%>. I'm <%=profile.age%> years old.</p>
 	<%for(var i=0; i<temp.length; i++){%>
