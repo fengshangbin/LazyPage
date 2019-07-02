@@ -7,7 +7,8 @@ if (typeof global !== 'undefined') {
 baidu.template = function(str, data) {
   var fn = bt._compile(str);
   var result = fn(data)
-    .replace(/<&([^&]*?)&>/g, '<%$1%>')
+    .replace(/<&(.*?)&>/g, '<%$1%>')
+    .replace(/<%&(.*?)&%>/g, '<&&$1&&>')
     .replace(/<&&/g, '<&')
     .replace(/&&>/g, '&>');
   fn = null;
@@ -54,8 +55,8 @@ bt._analysisStr = function(str) {
     .replace(new RegExp('(' + _left + '[^' + _right + ']*)//.*\n', 'g'), '$1')
     .replace(/<!--[\w\W]*?-->/gm, '')
     /* .replace(/{@(.*?)}/g, function(match, $1, offset) {
-      return 'LazyPage.data.' + $1;
-    }) */
+		  return 'LazyPage.data.' + $1;
+		}) */
     .replace(new RegExp(_left + '\\*.*?\\*' + _right, 'g'), '')
     .replace(new RegExp('[\\r\\t\\n]', 'g'), '')
     .replace(new RegExp(_left + '(?:(?!' + _right + ')[\\s\\S])*' + _right + '|((?:(?!' + _left + ')[\\s\\S])+)', 'g'), function(item, $1) {
@@ -96,29 +97,18 @@ bt._analysisStr = function(str) {
     .join("\\'");
   return str;
 };
-function run(str, modeData) {
-  if (typeof modeData == 'string') modeData = JSON.parse(modeData);
-  result = baidu.template(str, modeData);
+function run(str, data, mode) {
+  if (typeof data == 'string') data = JSON.parse(data);
+  if (mode == null) {
+    result = baidu.template(str, data);
+  } else {
+    result = eval('data.' + str) + '';
+    if (mode == 'false' && typeof result == 'string') result = '"' + result + '"';
+  }
   return result;
 }
-/* function run(str, allData, modeData) {
-  if (typeof allData == 'string') allData = JSON.parse(allData);
-  LazyPage.data = allData;
-  var result = '';
-  if (modeData != null) {
-    if (typeof modeData == 'string') modeData = JSON.parse(modeData);
-    result = baidu.template(str, modeData);
-  } else {
-    result = eval('LazyPage.data.' + str);
-  }
-  str = null;
-  data = null;
-  modeData = null;
-  LazyPage.data = null;
-  return result;
-} */
 if (typeof module === 'undefined') {
-  run(str, modeData);
+  run(str, data, mode);
 } else {
   module.exports = run;
 }

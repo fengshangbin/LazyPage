@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var webpackConfig = require('./webpack.dev.config');
-var serverStatic = require('./server.static');
+var serverFilter = require('./server.filter');
 
 var compiler = webpack(webpackConfig);
 var devMiddleware = webpackDevMiddleware(compiler, {
@@ -15,7 +15,7 @@ var hotMiddleware = webpackHotMiddleware(compiler);
 var app = express();
 app.use(devMiddleware);
 app.use(hotMiddleware);
-app.use(serverStatic.filter('examples'));
+app.use(serverFilter.filter('examples'));
 app.use(express.static('examples'));
 
 var server = app.listen(8085, function() {

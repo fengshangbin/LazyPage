@@ -18,7 +18,7 @@ function renderDom(block) {
   if (html == null || data == null) return;
   //html = replaceParamAsString(html);
   html = replaceParamAsValue(html, false);
-  //console.log(html);
+  //console.log(html, data);
   let out = baidu.template(html, data);
   //console.log(block);
   block.outerHTML = out;
@@ -177,6 +177,7 @@ function runBlock(block, callback) {
         data: ajaxData,
         success: function(msg) {
           msg = JSON.parse(msg);
+          //console.log(source, msg);
           addModeData(block, msg);
           renderDom(block);
         },
