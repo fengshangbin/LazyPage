@@ -160,8 +160,8 @@ LazyPage.addJsFile(rootPath+"/js/format.js");
 # 关于前端测试
 
 由于支持加载外部模板和自定义路由，传统的双击测试 file://xx/x.html 会跨域报错，所以需要搭建一个简易的 http 环境  
-方法 1: 结合 LazyPage-node.js 作为前端开发测试，参见https://github.com/fengshangbin/LazyPage-java  
-方法 2: 热编译模式参见 server.js，启动方式 npm run server
+结合 LazyPage-node.js 作为前端开发测试，参见https://github.com/fengshangbin/LazyPage-node.js  
+Webpack 热编译模式参见 server.js，启动方式 npm run server
 
 # 后端整合
 
