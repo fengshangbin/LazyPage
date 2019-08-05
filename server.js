@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var webpackConfig = require('./webpack.dev.config');
-var serverFilter = require('./server.filter');
+var serverFilter = require('lazypage-node');
 
 var compiler = webpack(webpackConfig);
 var devMiddleware = webpackDevMiddleware(compiler, {
@@ -17,6 +17,8 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 app.use(serverFilter.filter('examples'));
 app.use(express.static('examples'));
+
+global.format = require('./examples/js/format');
 
 var server = app.listen(8085, function() {
   console.log('LazyPage node.js测试，访问地址为 http://localhost:8085/');
