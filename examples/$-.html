@@ -3,13 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0" />
-    <script type="x-tmpl-lazypage" source="cgi/title.json">
-      <title><%=name%></title>
+    <script type="x-tmpl-lazypage">
+      <%var path={$0}==""?"a":{$0}%>
+      <title><%=path%></title>
     </script>
+    <style>
+      .lazypage {
+        width: 100px;
+        height: 100px;
+        left: 100px;
+        top: 150px;
+        background: #aaa;
+      }
+      .lazypage .lazypage {
+        left: 0;
+        top: 0;
+      }
+    </style>
+    <script src="dist/lazypage.js"></script>
   </head>
 
   <body>
     你好1
+    <a href="/a" data-animate="slide">a</a>
+    <a href="/b" data-animate="slide">b</a>
+    <a href="/c" data-animate="slide">c</a>
+    <a href="https://www.baidu.com" data-animate="slide">baidu</a>
+    <a href="/2/2" data-direct="true">2/2</a>
+    <script type="x-tmpl-lazypage">
+      <%var path={$0}==""?"a":{$0}%>
+      <div class="lazypage default <%=path=="a"?"in":"out"%>" data-page="a" data-title="a">a</div>
+      <div class="lazypage <%=path=="b"?"in":"out"%>" data-page="b" data-title="b">b</div>
+      <div class="lazypage <%=path=="c"?"in":"out"%>" data-page="c" data-title="c">c</div>
+    </script>
+
     <script type="x-tmpl-lazypage" source="cgi/list.json" id="block1">
       <p>date: <%=format.dataFormat("dd-MM-yyyy hh:mm:ss TT", 1550487329)%>, number: <%=format.toThousands(123456789.123)%></p>
       <p>class name script: <%=team%></p>
@@ -36,16 +63,6 @@
       <%}%>
     </script>
     <script type="x-tmpl-lazypage" source="{'name':'Krasimir Tsonev','profile':{'age':2}}" src="include/_body.html?v=haha"></script>
-    <script src="dist/lazypage.js"></script>
     <script src="js/format.js"></script>
-    <script>
-      LazyPage.ready(function() {
-        var person = document.getElementById('lazy-block');
-        person.setAttribute('ajax-data', 'id=1');
-        LazyPage.runBlock(person, function() {
-          console.log('lazy-block render over');
-        });
-      });
-    </script>
   </body>
 </html>

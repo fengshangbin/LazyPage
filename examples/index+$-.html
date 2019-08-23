@@ -4,10 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0" />
     <title>LazyPage Demo</title>
+    <style>
+      .lazypage {
+        width: 100px;
+        height: 100px;
+        left: 100px;
+        top: 100px;
+        background: #aaa;
+      }
+    </style>
   </head>
 
   <body>
     你好3
+    <a href="index/a" data-animate="slide">a</a>
+    <a href="index/b" data-animate="slidevertical">b</a>
+    <a href="index/c" data-animate="slide">c</a>
+
+    <div class="lazypage in" id="a">a</div>
+    <div class="lazypage out" id="b">b</div>
+    <div class="lazypage out" id="c">c</div>
+
     <script type="x-tmpl-lazypage" source="../cgi/list.json" id="block1">
       <p>date: <%=format.dataFormat("dd-MM-yyyy hh:mm:ss TT", 1550487329)%>, number: <%=format.toThousands(123456789.123)%></p>
       <p>class name script: <%=team%></p>
