@@ -1,5 +1,3 @@
-import ajax from "./ajax.js";
-import analyzeScript from "./analyzeScript";
 import { push } from "./history";
 import { getPath, changeTitle } from "./utils";
 import { pageIn, pageOut } from "./animate";
@@ -8,7 +6,8 @@ import {
   showSun,
   showDefaultPage,
   getFinalPath,
-  getFinalPage
+  getFinalPage,
+  loadPage
 } from "./element";
 
 export var lastPath = getPath(location.href);
@@ -41,66 +40,15 @@ export function goto(url, options) {
     }
   }
   if (target == null || elements.ajaxSun) {
-    ajax({
-      url: url,
-      data:
-        "lazypageTargetSelector=" + encodeURIComponent(elements.targetSelector),
-      //header: { lazypageajax: true },
-      success: function(data) {
-        var data = JSON.parse(data);
-        if (data.hasTargetLazyPage) {
-          var addTarget;
-          var block = data.block;
-          var group = /data-sort *= *"([0-9])*"/i.exec(block);
-          var sort = group ? parseFloat(group[1]) : 0;
-          var siblings = target
-            ? target.childrens("lazypage")
-            : current.siblings("lazypage", true);
-          for (var i = 0; i < siblings.data.length; i++) {
-            var item = siblings.data[i];
-            var itemSort = parseFloat(item.getAttribute("data-sort") || "0");
-            if (sort < itemSort) {
-              item.insertAdjacentHTML("beforebegin", block);
-              addTarget = item.previousSibling || item.previousElementSibling;
-              break;
-            } else if (i == siblings.data.length - 1) {
-              item.insertAdjacentHTML("afterend", block);
-              addTarget = item.nextSibling || item.nextElementSibling;
-            }
-          }
-          var finalePage = getFinalPage(addTarget);
-          finalePage.setAttribute(
-            "data-title",
-            data.title.replace(/<\/?title>/gi, "")
-          );
-          if (target == null) target = addTarget;
-
-          let matchScripts = analyzeScript.extractCode(block);
-          var codes = matchScripts.codes;
-          var srcs = matchScripts.srcs;
-          for (let m = 0, len = codes.length; m < len; m++) {
-            analyzeScript.evalScripts(codes[m]);
-          }
-          if (srcs.length > 0) {
-            var blockScriptLoad = 0;
-            for (let n = 0, len = srcs.length; n < len; n++) {
-              analyzeScript.dynamicLoadJs(srcs[n], function() {
-                blockScriptLoad++;
-                if (blockScriptLoad == srcs.length) {
-                  transition(url, current, target, elements.sun, options);
-                }
-              });
-            }
-          } else {
-            transition(url, current, target, elements.sun, options);
-          }
-        } else {
-          location.href = url;
-        }
-      },
-      error: function(e) {
-        console.log("error", e);
+    loadPage(url, function(addedLazyPage) {
+      //console.log(addedLazyPage);
+      if (addedLazyPage == null) {
+        location.href = url;
+        return true;
+      } else if (target == null) {
+        target = addedLazyPage;
       }
+      transition(url, current, target, elements.sun, options);
     });
   } else {
     transition(url, current, target, elements.sun, options);

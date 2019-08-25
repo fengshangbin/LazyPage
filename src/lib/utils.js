@@ -173,3 +173,12 @@ export function changeTitle(title) {
     document.title = title;
   }
 }
+
+export function urlToPaths(url) {
+  return getPath(url)
+    .replace(/(\?.*)|(#.*)/, "")
+    .split("/")
+    .filter(a => {
+      return a.length > 0;
+    });
+}
