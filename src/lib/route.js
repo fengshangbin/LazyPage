@@ -1,4 +1,5 @@
 import ajax from "./ajax.js";
+import analyzeScript from "./analyzeScript";
 import { push } from "./history";
 import { getPath, changeTitle } from "./utils";
 import { pageIn, pageOut } from "./animate";
@@ -73,7 +74,26 @@ export function goto(url, options) {
             data.title.replace(/<\/?title>/gi, "")
           );
           if (target == null) target = addTarget;
-          transition(url, current, target, elements.sun, options);
+
+          let matchScripts = analyzeScript.extractCode(block);
+          var codes = matchScripts.codes;
+          var srcs = matchScripts.srcs;
+          for (let m = 0, len = codes.length; m < len; m++) {
+            analyzeScript.evalScripts(codes[m]);
+          }
+          if (srcs.length > 0) {
+            var blockScriptLoad = 0;
+            for (let n = 0, len = srcs.length; n < len; n++) {
+              analyzeScript.dynamicLoadJs(srcs[n], function() {
+                blockScriptLoad++;
+                if (blockScriptLoad == srcs.length) {
+                  transition(url, current, target, elements.sun, options);
+                }
+              });
+            }
+          } else {
+            transition(url, current, target, elements.sun, options);
+          }
         } else {
           location.href = url;
         }
