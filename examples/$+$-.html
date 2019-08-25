@@ -2,30 +2,39 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0"
+    />
     <script type="x-tmpl-lazypage">
       <%var path={$1}==""?"1":{$1};%>
       <title><%={$0}+"-"+path%></title>
     </script>
+    <link href="/dist/lazypage.css" rel="stylesheet" type="text/css" />
     <style>
-      .lazypage {
-        width: 100px;
-        height: 100px;
-        left: 100px;
-        top: 150px;
-        background: #aaa;
+      .conatiner {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        font-size: 24px;
+        text-align: center;
+        line-height: 200px;
       }
-      .lazypage .lazypage {
-        left: 0;
-        top: 0;
-        background: #aaa;
+      .conatiner [data-page="1"] {
+        background: green;
+      }
+      .conatiner [data-page="2"] {
+        background: blue;
+      }
+      .conatiner [data-page="3"] {
+        background: red;
       }
       ul {
         display: inline-block;
         margin-right: 50px;
       }
     </style>
-    <script src="/dist/lazypage.js"></script>
   </head>
 
   <body>
@@ -51,9 +60,22 @@
     <a href="/a" data-direct="true">a</a>
     <script type="x-tmpl-lazypage">
       <%var path={$1}==""?"1":{$1};%>
-      <div class="lazypage in" data-page="<%={$0}%>" data-sort="<%={$0}%>">
-        <div class="lazypage in <%=path=="1"?"default":""%>" data-page="<%=path%>" data-animate="slidevertical"  data-sort="<%=path%>"><%={$0}+"-"+path%></div>
+      <div class="conatiner">
+        <div class="lazypage in" data-page="<%={$0}%>" data-sort="<%={$0}%>">
+          <div class="lazypage in <%=path=="1"?"default":""%>" data-page="<%=path%>" data-animate="slidevertical"  data-sort="<%=path%>"><%={$0}+"-"+path%></div>
+        </div>
       </div>
+    </script>
+    <script src="/dist/lazypage.js"></script>
+    <script>
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_FIRST_IN, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_START, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_END, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_OUT_START, test);
+      LazyPage.addEventListener(LazyPage.PageEvent.PAGE_OUT_END, test);
+      function test(e) {
+        console.log(e);
+      }
     </script>
   </body>
 </html>

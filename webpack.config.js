@@ -1,20 +1,29 @@
-const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
+const path = require("path");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
-    lazypage: ['./src/index.js']
+    lazypage: ["./src/index.js"]
   },
-  plugins: [new CleanWebpackPlugin(['dist']), new webpack.BannerPlugin(' lazypage.js \n by fengshangbin 2019-01-10 \n https://github.com/fengshangbin/LazyPage \n Easy H5 Page Framework')],
+  plugins: [
+    new CleanWebpackPlugin(["dist"]),
+    new webpack.BannerPlugin(
+      " lazypage.js \n by fengshangbin 2019-01-10 \n https://github.com/fengshangbin/LazyPage \n Easy H5 Page Framework"
+    ),
+    new MiniCssExtractPlugin({
+      filename: "lazypage.css"
+    })
+  ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
-    filename: '[name].js',
-    library: 'LazyPage'
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/dist/",
+    filename: "[name].js",
+    library: "LazyPage"
   },
   devServer: {
-    contentBase: './examples',
+    contentBase: "./examples",
     inline: true
   },
   module: {
@@ -23,18 +32,23 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
+            presets: ["@babel/preset-env"]
           }
         }
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.less$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: "css-loader" },
+          { loader: "less-loader" },
+          { loader: "postcss-loader" }
+        ]
       }
     ]
   },
-  target: 'web',
-  mode: 'production'
+  target: "web",
+  mode: "production"
 };

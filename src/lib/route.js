@@ -1,17 +1,18 @@
-/* 1, Animation
-2, Back
-3, defalut
-4, callback
-*/
-
-import ajax from './ajax.js';
-import { push } from './history';
-import { getPath } from './utils';
-import { getElementByPath, showSun, showDefaultPage, getFinalPath } from './element';
+import ajax from "./ajax.js";
+import { push } from "./history";
+import { getPath, changeTitle } from "./utils";
+import { pageIn, pageOut } from "./animate";
+import {
+  getElementByPath,
+  showSun,
+  showDefaultPage,
+  getFinalPath,
+  getFinalPage
+} from "./element";
 
 export var lastPath = getPath(location.href);
 
-var supportHistory = 'pushState' in history && 'replaceState' in history;
+var supportHistory = "pushState" in history && "replaceState" in history;
 
 export function goto(url, options) {
   if (!supportHistory) {
@@ -27,17 +28,22 @@ export function goto(url, options) {
 
   var current = elements.current;
   var target = elements.target;
-  if (options.animate == 'auto') {
+  if (current.getAttribute("data-animate") == "popup") {
+    options.animate = "popup";
+    options.isBack = true;
+  }
+  if (options.animate == "auto") {
     if (target != null) {
-      options.animate = target.getAttribute('data-animate') || 'slide';
+      options.animate = target.getAttribute("data-animate") || "slide";
     } else {
-      options.animate = current.getAttribute('data-animate') || 'slide';
+      options.animate = current.getAttribute("data-animate") || "slide";
     }
   }
   if (target == null || elements.ajaxSun) {
     ajax({
       url: url,
-      data: 'lazypageTargetSelector=' + encodeURIComponent(elements.targetSelector),
+      data:
+        "lazypageTargetSelector=" + encodeURIComponent(elements.targetSelector),
       //header: { lazypageajax: true },
       success: function(data) {
         var data = JSON.parse(data);
@@ -46,31 +52,26 @@ export function goto(url, options) {
           var block = data.block;
           var group = /data-sort *= *"([0-9])*"/i.exec(block);
           var sort = group ? parseFloat(group[1]) : 0;
-          var siblings = target ? target.childrens('lazypage') : current.siblings('lazypage', true);
+          var siblings = target
+            ? target.childrens("lazypage")
+            : current.siblings("lazypage", true);
           for (var i = 0; i < siblings.data.length; i++) {
             var item = siblings.data[i];
-            var itemSort = parseFloat(item.getAttribute('data-sort') || '0');
+            var itemSort = parseFloat(item.getAttribute("data-sort") || "0");
             if (sort < itemSort) {
-              item.insertAdjacentHTML('beforebegin', block);
+              item.insertAdjacentHTML("beforebegin", block);
               addTarget = item.previousSibling || item.previousElementSibling;
               break;
             } else if (i == siblings.data.length - 1) {
-              item.insertAdjacentHTML('afterend', block);
+              item.insertAdjacentHTML("afterend", block);
               addTarget = item.nextSibling || item.nextElementSibling;
             }
           }
-          var newLazypages = addTarget.querySelectorAll('.lazypage');
-          var latestPageCount = 0;
-          var latestPage = addTarget;
-          for (var j = 0; j < newLazypages.length; j++) {
-            if (newLazypages[j].querySelector('.lazypage') == null) {
-              latestPageCount++;
-              latestPage = newLazypages[j];
-            }
-          }
-          if (latestPageCount <= 1) {
-            latestPage.setAttribute('data-title', data.title.replace(/<\/?title>/gi, ''));
-          }
+          var finalePage = getFinalPage(addTarget);
+          finalePage.setAttribute(
+            "data-title",
+            data.title.replace(/<\/?title>/gi, "")
+          );
           if (target == null) target = addTarget;
           transition(url, current, target, elements.sun, options);
         } else {
@@ -78,7 +79,7 @@ export function goto(url, options) {
         }
       },
       error: function(e) {
-        console.log('error', e);
+        console.log("error", e);
       }
     });
   } else {
@@ -88,42 +89,20 @@ export function goto(url, options) {
 }
 
 function transition(path, current, target, sun, options) {
-  if (typeof options.isBack == 'string') {
-    if (options.isBack === 'auto') options.isBack = target.compareDocumentPosition(current) == 4;
-    else options.isBack = options.isBack === 'true';
+  if (typeof options.isBack == "string") {
+    if (options.isBack === "auto")
+      options.isBack = target.compareDocumentPosition(current) == 4;
+    else options.isBack = options.isBack === "true";
   }
   //console.log(options);
   if (current != target) {
-    current.style.display = 'block';
-    target.style.display = 'block';
-
-    //console.log(options.isBack);
-    if (options.isBack) {
-      current.classList.add('reverse');
-      target.classList.add('reverse');
-    }
-
-    current.classList.remove('in');
-    current.classList.add(options.animate);
-    current.classList.add('out');
-
-    target.classList.remove('out');
-    target.classList.add(options.animate);
-    target.classList.add('in');
-
-    function animationend(e) {
-      var page = e.target;
-      page.classList.remove('reverse');
-      page.classList.remove(options.animate);
-      if (page.classList.contains('out')) page.style.display = 'none';
-      page.removeEventListener('animationend', animationend);
-    }
-    current.addEventListener('animationend', animationend);
-    target.addEventListener('animationend', animationend);
+    pageOut(current, options);
+    pageIn(target, options);
   }
 
   var finalPage = showSun(target, sun);
-  showDefaultPage(finalPage, options.setTitle);
+  showDefaultPage(finalPage);
+  changeTitle(getFinalPage(finalPage).getAttribute("data-title"));
   var finalPath = getFinalPath(path, finalPage);
   push(finalPath, options);
   lastPath = finalPath;

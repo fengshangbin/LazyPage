@@ -2,39 +2,51 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0"
+    />
     <script type="x-tmpl-lazypage">
       <%var path={$0}==""?"a":{$0}%>
       <title><%=path%></title>
     </script>
+    <link href="/dist/lazypage.css" rel="stylesheet" type="text/css" />
     <style>
-      .lazypage {
-        width: 100px;
-        height: 100px;
-        left: 100px;
-        top: 150px;
-        background: #aaa;
+      .conatiner {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        font-size: 24px;
+        text-align: center;
+        line-height: 200px;
       }
-      .lazypage .lazypage {
-        left: 0;
-        top: 0;
+      .conatiner [data-page="a"] {
+        background: green;
+      }
+      .conatiner [data-page="b"] {
+        background: blue;
+      }
+      .conatiner [data-page="c"] {
+        background: red;
       }
     </style>
-    <script src="dist/lazypage.js"></script>
   </head>
 
   <body>
     你好1
-    <a href="/a" data-animate="slide">a</a>
-    <a href="/b" data-animate="slide">b</a>
-    <a href="/c" data-animate="slide">c</a>
-    <a href="https://www.baidu.com" data-animate="slide">baidu</a>
+    <a href="/a">a</a>
+    <a href="/b">b</a>
+    <a href="/c">c</a>
+    <a href="https://www.baidu.com">baidu</a>
     <a href="/2/2" data-direct="true">2/2</a>
     <script type="x-tmpl-lazypage">
       <%var path={$0}==""?"a":{$0}%>
-      <div class="lazypage default <%=path=="a"?"in":"out"%>" data-page="a" data-title="a">a</div>
-      <div class="lazypage <%=path=="b"?"in":"out"%>" data-page="b" data-title="b">b</div>
-      <div class="lazypage <%=path=="c"?"in":"out"%>" data-page="c" data-title="c">c</div>
+      <div class="conatiner">
+        <div class="lazypage default <%=path=="a"?"in":"out"%>" data-page="a" data-animate="slide" data-title="a">a</div>
+        <div class="lazypage <%=path=="b"?"in":"out"%>" data-page="b" data-animate="fade" data-title="b">b</div>
+        <div class="lazypage <%=path=="c"?"in":"out"%>" data-page="c" data-animate="popup" data-title="c">c</div>
+      </div>
     </script>
 
     <script type="x-tmpl-lazypage" source="cgi/list.json" id="block1">
@@ -49,10 +61,20 @@
       	<%}%>
       <%}%>
     </script>
-    <script type="x-tmpl-lazypage" source="cgi/person.json" lazy="true" id="lazy-block">
+    <script
+      type="x-tmpl-lazypage"
+      source="cgi/person.json"
+      lazy="true"
+      id="lazy-block"
+    >
       <p>Hello2, my name is <%=name%>. I'm <%=profile.age%> years old.</p>
     </script>
-    <script type="x-tmpl-lazypage" source="cgi/person.json" wait="block1" ajax-data="id={@block1.team}">
+    <script
+      type="x-tmpl-lazypage"
+      source="cgi/person.json"
+      wait="block1"
+      ajax-data="id={@block1.team}"
+    >
       <p>Hello3, my name is <%=name%>. I'm <%=profile.age%> years old.<%={@block1.team}%>.</p>
     </script>
     <script type="x-tmpl-lazypage" source="cgi/person.json">
@@ -62,7 +84,12 @@
       	<%=i%>: <%=temp[i]%><br/>
       <%}%>
     </script>
-    <script type="x-tmpl-lazypage" source="{'name':'Krasimir Tsonev','profile':{'age':2}}" src="include/_body.html?v=haha"></script>
+    <script
+      type="x-tmpl-lazypage"
+      source="{'name':'Krasimir Tsonev','profile':{'age':2}}"
+      src="include/_body.html?v=haha"
+    ></script>
     <script src="js/format.js"></script>
+    <script src="/dist/lazypage.js"></script>
   </body>
 </html>

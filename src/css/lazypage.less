@@ -1,0 +1,170 @@
+.lazypage {
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.lazypage.out {
+  display: none;
+}
+.in,
+.out {
+  animation-fill-mode: both;
+}
+//slide
+.slide.out,
+.slide.in {
+  animation-timing-function: ease-out;
+  animation-duration: 225ms;
+}
+.slide.in {
+  animation-name: slideinfromright;
+}
+.slide.out {
+  animation-name: slideouttoleft;
+}
+.slide.reverse.out {
+  animation-name: slideouttoright;
+}
+.slide.reverse.in {
+  animation-name: slideinfromleft;
+}
+
+@keyframes slideinfromright {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideinfromleft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideouttoleft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slideouttoright {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+//slidevertical
+.slidevertical.out,
+.slidevertical.in {
+  animation-timing-function: ease-out;
+  animation-duration: 225ms;
+}
+.slidevertical.in {
+  animation-name: slideinfrombottom;
+}
+.slidevertical.out {
+  animation-name: slideouttotop;
+}
+.slidevertical.reverse.out {
+  animation-name: slideouttobottom;
+}
+.slidevertical.reverse.in {
+  animation-name: slideinfromtop;
+}
+@keyframes slideinfrombottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideinfromtop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideouttotop {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+@keyframes slideouttobottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+//fade
+.fade.out,
+.fade.in {
+  animation-timing-function: ease-in;
+  animation-duration: 400ms;
+}
+.fade.in {
+  animation-name: fadein;
+  animation-delay: 400ms;
+}
+.fade.out {
+  animation-name: fadeout;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+//popup
+.popup.out,
+.popup.in {
+  animation-timing-function: ease-out;
+  animation-duration: 225ms;
+}
+.popup.in {
+  animation-name: slideinfrombottom;
+}
+.popup.out {
+  animation-name: withoutanimate;
+}
+.popup.reverse.out {
+  animation-name: slideouttobottom;
+}
+.popup.reverse.in {
+  animation-name: withoutanimate;
+}
+@keyframes withoutanimate {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

@@ -1,4 +1,14 @@
+/*!
+ *  lazypage.js 
+ *  by fengshangbin 2019-01-10 
+ *  https://github.com/fengshangbin/LazyPage 
+ *  Easy H5 Page Framework
+ */
 .lazypage {
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
   position: absolute;
 }
 .lazypage.out {
@@ -12,8 +22,8 @@
 .slide.out,
 .slide.in {
   -webkit-animation-timing-function: ease-out;
-  -webkit-animation-duration: 225ms;
   animation-timing-function: ease-out;
+  -webkit-animation-duration: 225ms;
   animation-duration: 225ms;
 }
 .slide.in {
@@ -32,14 +42,12 @@
   -webkit-animation-name: slideinfromleft;
   animation-name: slideinfromleft;
 }
-
-/* keyframes for slidein from sides */
 @-webkit-keyframes slideinfromright {
   from {
-    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translateX(100%);
   }
   to {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 }
 @keyframes slideinfromright {
@@ -52,10 +60,10 @@
 }
 @-webkit-keyframes slideinfromleft {
   from {
-    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translateX(-100%);
   }
   to {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 }
 @keyframes slideinfromleft {
@@ -66,13 +74,12 @@
     transform: translateX(0);
   }
 }
-/* keyframes for slideout to sides */
 @-webkit-keyframes slideouttoleft {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
   to {
-    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translateX(-100%);
   }
 }
 @keyframes slideouttoleft {
@@ -85,10 +92,10 @@
 }
 @-webkit-keyframes slideouttoright {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
   to {
-    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translateX(100%);
   }
 }
 @keyframes slideouttoright {
@@ -99,12 +106,11 @@
     transform: translateX(100%);
   }
 }
-
 .slidevertical.out,
 .slidevertical.in {
   -webkit-animation-timing-function: ease-out;
-  -webkit-animation-duration: 225ms;
   animation-timing-function: ease-out;
+  -webkit-animation-duration: 225ms;
   animation-duration: 225ms;
 }
 .slidevertical.in {
@@ -123,13 +129,12 @@
   -webkit-animation-name: slideinfromtop;
   animation-name: slideinfromtop;
 }
-/* keyframes for slidein from slidepvertical */
 @-webkit-keyframes slideinfrombottom {
   from {
-    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translateY(100%);
   }
   to {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 }
 @keyframes slideinfrombottom {
@@ -142,10 +147,10 @@
 }
 @-webkit-keyframes slideinfromtop {
   from {
-    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translateY(-100%);
   }
   to {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 }
 @keyframes slideinfromtop {
@@ -156,13 +161,12 @@
     transform: translateY(0);
   }
 }
-/* keyframes for slideout to slidepvertical */
 @-webkit-keyframes slideouttotop {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   to {
-    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translateY(-100%);
   }
 }
 @keyframes slideouttotop {
@@ -175,10 +179,10 @@
 }
 @-webkit-keyframes slideouttobottom {
   from {
-    -webkit-transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
   to {
-    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translateY(100%);
   }
 }
 @keyframes slideouttobottom {
@@ -189,3 +193,92 @@
     transform: translateY(100%);
   }
 }
+.fade.out,
+.fade.in {
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+  -webkit-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
+.fade.in {
+  -webkit-animation-name: fadein;
+  animation-name: fadein;
+  -webkit-animation-delay: 400ms;
+  animation-delay: 400ms;
+}
+.fade.out {
+  -webkit-animation-name: fadeout;
+  animation-name: fadeout;
+}
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.popup.out,
+.popup.in {
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-animation-duration: 225ms;
+  animation-duration: 225ms;
+}
+.popup.in {
+  -webkit-animation-name: slideinfrombottom;
+  animation-name: slideinfrombottom;
+}
+.popup.out {
+  -webkit-animation-name: withoutanimate;
+  animation-name: withoutanimate;
+}
+.popup.reverse.out {
+  -webkit-animation-name: slideouttobottom;
+  animation-name: slideouttobottom;
+}
+.popup.reverse.in {
+  -webkit-animation-name: withoutanimate;
+  animation-name: withoutanimate;
+}
+@-webkit-keyframes withoutanimate {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes withoutanimate {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
