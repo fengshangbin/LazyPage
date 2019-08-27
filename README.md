@@ -251,7 +251,7 @@ lazypage 页面切换时，如果目标页面在 dom 中的位置是当前页面
 
 ### 6. 禁用部分页面切换动画(多页切换动画)
 
-如整站都不需要切换动画，则需要引入 lazypage.css 和 lazypage.js 文件即可  
+如整站都不需要切换动画，则不需要引入 lazypage.css 和 lazypage.js 文件即可  
 如果部分禁用可以在超链接 a 设置属性 data-direct="true"
 
 ```
@@ -334,7 +334,7 @@ lazypage 页面切换默认在点击超链接 a 标签时触发
 ```
 
 参数:  
-url: 跳转目标地址
+url: 跳转目标地址  
 options: 以下默认值
 
 ```
