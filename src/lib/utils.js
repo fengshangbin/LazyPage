@@ -8,7 +8,7 @@ Element.prototype.getParentElementByTag = function(tag) {
     var tagParent = parent.tagName.toLowerCase();
     if (tagParent === tag) {
       element = parent;
-    } else if (tagParent == "body") {
+    } else if (tagParent == 'body') {
       element = null;
     } else {
       popup();
@@ -24,7 +24,7 @@ Element.prototype.hasLazyPageParent = function(container) {
   var popup = function() {
     parent = parent.parentElement;
     if (parent == container) result = false;
-    else if (parent.classList.contains("lazypage")) result = true;
+    else if (parent.classList.contains('lazypage')) result = true;
     else popup();
   };
   popup();
@@ -59,7 +59,7 @@ Element.prototype.childrens = function(className) {
 
 function checkNode(className, children, nodeArray) {
   if (className && className.length > 0) {
-    if (typeof className == "string") {
+    if (typeof className == 'string') {
       if (children.classList.contains(className)) return true;
       else return false;
     } else {
@@ -95,7 +95,7 @@ function NodeArray() {
   };
   this.hide = function() {
     for (var i = 0; i < this.data.length; i++) {
-      this.data[i].style.display = "none";
+      this.data[i].style.display = 'none';
     }
   };
   return this;
@@ -125,10 +125,9 @@ export function extend(defaultOption, options) {
 }
 
 var domain = location.origin;
-if (domain == undefined)
-  domain = /^((https|http|ftp|rtsp|mms)?:\/\/[^/]*)/i.exec(location.href)[0];
+if (domain == undefined) domain = /^((https|http|ftp|rtsp|mms)?:\/\/[^/]*)/i.exec(location.href)[0];
 export function getPath(url) {
-  return url.replace(domain, "");
+  return url.replace(new RegExp(domain, 'i'), '');
 }
 
 export function C3Event(type, data) {
@@ -140,8 +139,7 @@ export function C3EventDispatcher() {
   var event = {};
   this.addEventListener = function(eventType, callback) {
     if (event[eventType] == null) event[eventType] = [];
-    if (event[eventType].indexOf(callback) == -1)
-      event[eventType].push(callback);
+    if (event[eventType].indexOf(callback) == -1) event[eventType].push(callback);
   };
   this.removeEventListener = function(eventType, callback) {
     if (event[eventType] == null) event[eventType] = [];
@@ -176,9 +174,11 @@ export function changeTitle(title) {
 
 export function urlToPaths(url) {
   return getPath(url)
-    .replace(/(\?.*)|(#.*)/, "")
-    .split("/")
-    .filter(a => {
+    .replace(/(\?.*)|(#.*)/, '')
+    .replace(/^\//, '')
+    .replace(/\/\//g, '/')
+    .split('/');
+  /* .filter(a => {
       return a.length > 0;
-    });
+    }); */
 }
