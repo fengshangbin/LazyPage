@@ -6,7 +6,7 @@ export function goto(url, options) {
   options = extend(
     {
       history: true,
-      isBack: false,
+      isBack: 'auto',
       animate: 'auto'
     },
     options

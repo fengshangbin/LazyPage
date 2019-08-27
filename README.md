@@ -124,9 +124,9 @@ LazyPage.addJsFile(rootPath+"/js/format.js");
 在文件名里$会转换为可变值访问，如home+news+$-.html => http://localhost:8089/home/news/xxx  
 这时模板参数 ajax-data="id={\$0}"会自动转换为 ajax-data="id=xxx"去编译
 
-### 8. 启用页面切换动画
+# 启用页面切换动画
 
-注：如果不需要多页间的切换动画，是不需要引入 lazypage.css 和 lazypage.js 文件的
+注：如果不需要多页间的切换动画，是不需要引入 lazypage.css 和 lazypage.js 文件的。  
 引用 lazypage.css 到页面
 
 ```
@@ -137,6 +137,212 @@ LazyPage.addJsFile(rootPath+"/js/format.js");
 
 ```
 <script src="js/lazypage.js"></script>
+```
+
+### 1. 页面和 URL 地址的对应关系(多页切换动画)
+
+把 URL 按/分隔后 应该能逐级找到对应的 dom 元素  
+如 news-.html 文件对应的 URL 地址是 域名/news, html 代码里要包含
+
+```
+<div class="lazypage in" data-page="news">...</div>
+```
+
+css 类 lazypage 代表当前为一个页面单元, 属性 data-page 为该页面单元所对应的 URL 地址  
+多层级页面关系  
+如 news+2019-.html 文件对应的 URL 地址是 域名/news/2019, html 代码里要包含
+
+```
+<div class="lazypage in" data-page="news">
+	...
+	<div class="lazypage in" data-page="2019">
+		...
+	</div>
+	...
+</div>
+```
+
+### 2. 默认页面(多页切换动画)
+
+如 \$-.html 文件 代码包含
+
+```
+<div class="lazypage default in" data-page="home">...</div>
+```
+
+当 URL 地址是 域名/ 或 域名/home 时 都会对应这个页面单元
+
+### 3. 多个同级页面单元(多页切换动画)
+
+如 news+\$-.html
+
+```
+<script type="x-tmpl-lazypage">
+	<div class="lazypage in" data-page="news">
+		...
+		<div class="lazypage <%={$0}=="2019"?"in":"out"%>" data-page="2019">2019</div>
+		<div class="lazypage <%={$0}=="2018"?"in":"out"%>" data-page="2018">2018</div>
+		<div class="lazypage <%={$0}=="2017"?"in":"out"%>" data-page="2017">2017</div>
+		...
+	</div>
+</script>
+```
+
+同级页面只能有一个 lazypage 元素是展示状态 CSS 样式 in，其他 lazypage 的 css 样式为 out
+
+### 4. 页面切换动画(多页切换动画)
+
+lazypage.css 内置了 slide、slidevertical、fade、popup 四种切换动画，您也可以自己定义自己需要的动画样式  
+lazypage 默认使用 slide 进行页面切换
+
+```
+<div class="lazypage" data-page="news" data-animate="slidevertical">...</div>
+```
+
+属性 data-animate 为该页面切换时的动画样式
+
+### 5. 页面顺序(多页切换动画)
+
+当页面动态载入时会按照属性 data-sort 的值去插入 dom 结构中  
+如 news+2017-.html 代码
+
+```
+<div class="lazypage in" data-page="news">
+	<div class="lazypage in" data-page="2017" data-sort="7">2017</div>
+</div>
+```
+
+news+2018-.html 代码
+
+```
+<div class="lazypage in" data-page="news">
+	<div class="lazypage in" data-page="2018" data-sort="8">2018</div>
+</div>
+```
+
+news+2019-.html 代码
+
+```
+<div class="lazypage in" data-page="news">
+	<div class="lazypage in" data-page="2019" data-sort="9">2019</div>
+</div>
+```
+
+当从 news/2018 跳转到 news/2019 时 dom 结构会变为
+
+```
+<div class="lazypage in" data-page="news">
+	<div class="lazypage in" data-page="2018" data-sort="8">2018</div>
+	<div class="lazypage in" data-page="2019" data-sort="9">2019</div>
+</div>
+```
+
+而从 news/2018 跳转到 news/2017 时 dom 结构会变为
+
+```
+<div class="lazypage in" data-page="news">
+	<div class="lazypage in" data-page="2017" data-sort="7">2017</div>
+	<div class="lazypage in" data-page="2018" data-sort="8">2018</div>
+</div>
+```
+
+lazypage 页面切换时，如果目标页面在 dom 中的位置是当前页面的前面，则会进行反转动画 css 类 reverse  
+反转动画在一些切换效果中很有用如 slide，在 fade 切换时则无效
+
+### 6. 禁用部分页面切换动画(多页切换动画)
+
+如整站都不需要切换动画，则需要引入 lazypage.css 和 lazypage.js 文件即可  
+如果部分禁用可以在超链接 a 设置属性 data-direct="true"
+
+```
+<a href="/index" data-direct="true">index(direct)</a>
+```
+
+### 7. 禁用 loading 动画(多页切换动画)
+
+loading 动画默认开启  
+关闭
+
+```
+<script>
+	LazyPage.closeLoading();
+</script>
+```
+
+开启
+
+```
+<script>
+	LazyPage.openLoading();
+</script>
+```
+
+### 8. 开启多页面预加载(多页切换动画)
+
+页面预加载默认关闭  
+开启
+
+```
+<script>
+	LazyPage.openPreLoad(urls); //urls为要预加载url数组，可以为空
+</script>
+```
+
+开启预加载后 会自动查找 DOM 中的 a 标签的超链接，预加载这些超链接对应的页面
+
+关闭
+
+```
+<script>
+	LazyPage.closePreLoad();
+</script>
+```
+
+### 9. 监听页面切换事件(多页切换动画)
+
+lazypage 页面切换会有 5 种事件发出  
+PAGE_FIRST_IN: 页面第一次进场  
+PAGE_IN_START: 页面开始进场  
+PAGE_IN_END: 页面结束进场  
+PAGE_OUT_START: 页面开始出场  
+PAGE_OUT_END: 页面结束出场
+
+```
+<script>
+    LazyPage.addEventListener(LazyPage.PageEvent.PAGE_FIRST_IN, function test(event) {
+        console.log(event);
+    });
+</script>
+```
+
+5 种事件 event 为相同结构  
+event.type: 当前事件类型  
+event.data.page 当前事件对应的页面单元  
+event.data.animate 页面切换动画类型  
+event.data.history 页面切换是否产生 history  
+event.data.isBack 页面切换动画是否反转
+
+### 10. 动态调用页面切换(多页切换动画)
+
+lazypage 页面切换默认在点击超链接 a 标签时触发
+也可以通过代码调用触发页面切换
+
+```
+<script>
+    LazyPage.goto(url,options);
+</script>
+```
+
+参数:  
+url: 跳转目标地址
+options: 以下默认值
+
+```
+{
+	history: true,
+	isBack: 'auto',
+	animate: 'auto'
+}
 ```
 
 # 关于前端测试
