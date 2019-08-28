@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
 var autoprefixer = require('gulp-autoprefixer');
-var minifycss = require('gulp-cssnano');
+var minifycss = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var del = require('del');
@@ -75,7 +75,7 @@ gulp.task('css', function() {
         replaceReved: true
       })
     )
-    .pipe(minifycss())
+    .pipe(minifycss({ compatibility: 'ie8' }))
     .pipe(rev())
     .pipe(gulp.dest('dist'))
     .pipe(rev.manifest())
