@@ -373,7 +373,7 @@ npm install --save-dev lazypage-node
 express
 
 ```
-npm install --save-dev lazypage-node
+npm install --save-dev express
 ```
 
 ### 3. 创建 server.js

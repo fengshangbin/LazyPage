@@ -1,4 +1,4 @@
-# LazyPage 模板渲染示例
+# LazyPage 整合 webpack 支持热更新
 
 ### 如何运行
 
@@ -12,4 +12,10 @@ npm install
 
 ```
 npm run server
+```
+
+打包
+
+```
+npm run build
 ```
