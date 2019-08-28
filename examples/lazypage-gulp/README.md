@@ -249,19 +249,19 @@ npm install --save-dev gulp-uglify
 
 ```
 var uglify = require('gulp-uglify');
-gulp.task('css', function() {
+gulp.task('js', function() {
   return gulp
-    .src(['dist/rev/**/*.json', 'src/**/*.css'])
+    .src(['dist/rev/**/*.json', 'src/**/*.js'])
     .pipe(
       revCollector({
         replaceReved: true
       })
     )
-    .pipe(minifycss())
+    .pipe(uglify())
     .pipe(rev())
     .pipe(gulp.dest('dist'))
     .pipe(rev.manifest())
-    .pipe(gulp.dest('dist/rev/css'));
+    .pipe(gulp.dest('dist/rev/js'));
 });
 ```
 
