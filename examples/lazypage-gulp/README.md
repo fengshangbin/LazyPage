@@ -214,13 +214,13 @@ gulp.task('image', function() {
 安装压缩 css 依赖
 
 ```
-npm install --save-dev gulp-cssnano
+npm install --save-dev gulp-clean-css
 ```
 
 创建 css 任务
 
 ```
-var minifycss = require('gulp-cssnano');
+var minifycss = require('gulp-clean-css');
 gulp.task('css', function() {
   return gulp
     .src(['dist/rev/**/*.json', 'src/**/*.css'])
