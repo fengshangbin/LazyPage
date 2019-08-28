@@ -401,9 +401,9 @@ node server
 
 访问地址为 http://localhost:8181/ 即可
 
-### 5. 整合 webpack
+### 5. 整合 webpack(热更新)
 
-### 6. 整合 gulp
+### 6. 整合 gulp(热更新)
 
 # 后端整合
 
