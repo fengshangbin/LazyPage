@@ -18,23 +18,23 @@ document.addEventListener('click', function(event) {
   if (target.getAttribute('data-direct') == 'true') {
     return false;
   }
-  var animate = target.getAttribute('data-animate') || 'auto';
-  var isBack = target.getAttribute('data-back') || 'auto';
+  //var animate = target.getAttribute('data-animate') || 'auto';
+  //var isBack = target.getAttribute('data-back') || 'auto';
   var history = target.getAttribute('data-history') || 'true';
   var state = goto(href, {
     history: history === 'true',
-    isBack: isBack,
-    animate: animate
+    isBack: 'auto',
+    animate: 'auto'
   });
   if (state) event.preventDefault();
 });
 window.onpopstate = function() {
   var options = pop();
-  if (options) {
-    goto(location.href, options);
-  } else {
+  //if (options) {
+  goto(location.href, options);
+  /* } else {
     location.reload();
-  }
+  } */
 };
 ready(function() {
   var currentLazyPage = getFinalPage(document.body);

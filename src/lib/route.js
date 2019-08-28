@@ -1,6 +1,6 @@
 import { push } from './history';
 import { getPath, changeTitle } from './utils';
-import { pageIn, pageOut } from './animate';
+import { pageAnimate } from './animate';
 import { getElementByPath, showSun, showDefaultPage, getFinalPath, getFinalPage, loadPage } from './element';
 import { needLoading } from '../index';
 
@@ -60,29 +60,13 @@ function removeLoading(lazypage) {
 }
 
 function transition(path, current, target, sun, options) {
-  if (current.getAttribute('data-animate') == 'popup') {
-    options.animate = 'popup';
-    options.isBack = true;
-  }
-  if (target.getAttribute('data-animate') == 'popup') {
-    options.isBack = false;
-  }
-  if (options.animate == 'auto') {
-    options.animate = target.getAttribute('data-animate') || 'slide';
-  }
-  if (typeof options.isBack == 'string') {
-    if (options.isBack === 'auto') options.isBack = target.compareDocumentPosition(current) == 4;
-    else options.isBack = options.isBack === 'true';
-  }
   //console.log(options);
-  if (current != target) {
-    pageOut(current, options);
-    pageIn(target, options);
-  }
-
   var finalPage = showSun(target, sun);
   showDefaultPage(finalPage);
   changeTitle(getFinalPage(finalPage).getAttribute('data-title'));
+  if (current != target) {
+    pageAnimate(current, target, options);
+  }
   var finalPath = getFinalPath(path, finalPage);
   push(finalPath, options);
   lastPath = finalPath;

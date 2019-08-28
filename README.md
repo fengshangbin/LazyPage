@@ -21,7 +21,7 @@ GitHub Pages: https://github.com/fengshangbin/LazyPage
 
 # 关于 LazyPage
 
-LazyPage 是一个前端框架，帮助前端人员高质量高效率完成前端开发，让后端人员可以彻底远离前端代码可以专心提供数据接口。纯原生，无任何依赖，超轻量级 GZip 后只有 3KB
+LazyPage 是一个前端框架，帮助前端人员高质量高效率完成前端开发，让后端人员可以彻底远离前端代码可以专心提供数据接口。
 主要特点  
 1, 支持前后端彻底分离，前端可以自主任意定义页面地址，并且支持搜索引擎爬虫爬取完整网页内容。  
 2, 前端采用模板渲染数据的方式，可以简单引用外部模板文件，简化代码，不用写一堆重复代码了。  
@@ -253,10 +253,13 @@ lazypage 页面切换时，如果目标页面在 dom 中的位置是当前页面
 
 如整站都不需要切换动画，则不需要引入 lazypage.css 和 lazypage.js 文件即可  
 如果部分禁用可以在超链接 a 设置属性 data-direct="true"
+如果跨域名跳转链接时会自动直接跳转的
 
 ```
 <a href="/index" data-direct="true">index(direct)</a>
 ```
+
+a 标签还有一个属性 data-history="true",默认为 true 控制页面切换时是否产生浏览器历史纪录
 
 ### 7. 禁用 loading 动画(多页切换动画)
 
@@ -284,7 +287,7 @@ loading 动画默认开启
 
 ```
 <script>
-	LazyPage.openPreLoad(urls); //urls为要预加载url数组，可以为空
+	LazyPage.openPreLoad(urls); //urls为要预加载url数组，可以不传
 </script>
 ```
 
@@ -319,7 +322,7 @@ PAGE_OUT_END: 页面结束出场
 event.type: 当前事件类型  
 event.data.page 当前事件对应的页面单元  
 event.data.animate 页面切换动画类型  
-event.data.history 页面切换是否产生 history  
+event.data.history 页面切换是否产生浏览器历史纪录  
 event.data.isBack 页面切换动画是否反转
 
 ### 10. 动态调用页面切换(多页切换动画)
@@ -329,27 +332,78 @@ lazypage 页面切换默认在点击超链接 a 标签时触发
 
 ```
 <script>
-    LazyPage.goto(url,options);
+    LazyPage.goto(url,history);
 </script>
 ```
 
 参数:  
 url: 跳转目标地址  
-options: 以下默认值
+history: 是否产生浏览器历史纪录,如没有此参数则默认为 true
+
+### 11. 页面标题(多页切换动画)
+
+如果一个 html 文件中只有唯一一个页面单元时，这个页面单元会自动继承该页面的 title 值，  
+如果有多个页面单元时 需要设置每个页面单元的标题 data-title
+如 news+\$-.html
 
 ```
-{
-	history: true,
-	isBack: 'auto',
-	animate: 'auto'
-}
+<script type="x-tmpl-lazypage">
+	<div class="lazypage in" data-page="news">
+		...
+		<div class="lazypage <%={$0}=="2019"?"in":"out"%>" data-page="2019" data-title="2019">2019</div>
+		<div class="lazypage <%={$0}=="2018"?"in":"out"%>" data-page="2018" data-title="2018">2018</div>
+		<div class="lazypage <%={$0}=="2017"?"in":"out"%>" data-page="2017" data-title="2017">2017</div>
+		...
+	</div>
+</script>
 ```
 
 # 关于前端测试
 
-由于支持加载外部模板和自定义路由，传统的双击测试 file://xx/x.html 会跨域报错，所以需要搭建一个简易的 http 环境  
-结合 LazyPage-node.js 作为前端开发测试，参见https://github.com/fengshangbin/LazyPage-node.js  
-Webpack 热编译模式参见 server.js，启动方式 npm run server
+### 1. 安装 nodejs 环境
+
+### 2. 安装依赖
+
+lazypage-node
+
+```
+npm install --save-dev lazypage-node
+```
+
+express
+
+```
+npm install --save-dev lazypage-node
+```
+
+### 3. 创建 server.js
+
+```
+var express = require('express');
+var serverFilter = require('lazypage-node');
+
+var app = express();
+app.use(serverFilter.filter('src')); // src为当前项目前端代码目录
+app.use(express.static('src'));
+
+app.listen(8181, function() {
+  console.log('start lazypage server，访问地址为 http://localhost:8181/');
+});
+```
+
+### 4. 运行 server.js
+
+cmd 命令
+
+```
+node server
+```
+
+访问地址为 http://localhost:8181/ 即可
+
+### 5. 整合 webpack
+
+### 6. 整合 gulp
 
 # 后端整合
 

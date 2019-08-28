@@ -48,7 +48,12 @@ export function pop() {
       animate: historyItem.next.animate
     };
   } else {
-    console.log('-------------error-----------');
-    return null;
+    //console.log('-------------error-----------');
+    //console.log(historyItem, lastPath);
+    return {
+      history: false,
+      isBack: 'auto',
+      animate: 'auto'
+    };
   }
 }

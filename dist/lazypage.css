@@ -75,8 +75,6 @@
 .lazypage.fade.in {
   -webkit-animation-name: fadein;
   animation-name: fadein;
-  -webkit-animation-delay: 400ms;
-  animation-delay: 400ms;
 }
 .lazypage.fade.out {
   -webkit-animation-name: fadeout;
