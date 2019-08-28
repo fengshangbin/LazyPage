@@ -15,10 +15,10 @@ var hotMiddleware = webpackHotMiddleware(compiler);
 var app = express();
 app.use(devMiddleware);
 app.use(hotMiddleware);
-app.use(serverFilter.filter('examples'));
-app.use(express.static('examples'));
+app.use(serverFilter.filter('test'));
+app.use(express.static('test'));
 
-global.format = require('./examples/js/format');
+global.format = require('./test/js/format');
 
 var server = app.listen(8085, function() {
   console.log('LazyPage node.js测试，访问地址为 http://localhost:8085/');
