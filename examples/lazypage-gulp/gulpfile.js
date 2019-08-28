@@ -84,7 +84,7 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
   return gulp
-    .src(['dist/rev/**/*.json', 'src/**/*.js'])
+    .src(['dist/rev/**/*.json', 'src/**/*.js', '!src/js/format.js'])
     .pipe(
       revCollector({
         replaceReved: true
@@ -131,6 +131,7 @@ gulp.task('html', function() {
 
 gulp.task('copy', function(cb) {
   gulp.src('src/**/*.{mp4,pdf,ico,woff2,woff,ttf}').pipe(gulp.dest('dist'));
+  gulp.src('src/js/format.js').pipe(gulp.dest('dist/js'));
   cb();
 });
 

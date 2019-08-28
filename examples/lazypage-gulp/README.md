@@ -331,6 +331,15 @@ gulp.task('clean', function(cb) {
 });
 ```
 
+### 拷贝其他资源
+
+```
+gulp.task('copy', function(cb) {
+  gulp.src('src/**/*.{mp4,pdf,ico,woff2,woff,ttf}').pipe(gulp.dest('dist'));
+  cb();
+});
+```
+
 ### 创建打包任务
 
 ```

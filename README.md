@@ -403,6 +403,8 @@ node server
 
 ### 5. 整合 webpack(热更新)
 
+参见https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp
+
 ### 6. 整合 gulp(热更新)
 
 # 后端整合
