@@ -27,5 +27,5 @@ export function closeLoading() {
 export function openLoading() {
   needLoading = false;
 }
-export { addEventListener, removeEventListener, hasEventListener, PageEvent } from './lib/animate';
+export { addEventListener, removeEventListener, hasEventListener, PageEvent, animation } from './lib/animate';
 export { openPreLoad, closePreLoad };

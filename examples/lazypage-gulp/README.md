@@ -1,5 +1,9 @@
 # LazyPage 整合 gulp 支持热更新
 
+### GitHub Pages
+
+https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp
+
 ### 如何运行
 
 安装依赖
