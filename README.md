@@ -3,7 +3,7 @@
 LazyPage make you have easy and lazy front develop, and fully decoupled front-end and back-end development  
 LazyPage 让前端开发更简洁，彻底解耦前后端开发  
 LazyPage 让多页变单页，让单页变多页，彻底解决多页和单页各自的弊端  
-GitHub Pages: https://github.com/fengshangbin/LazyPage
+GitHub Pages: [https://github.com/fengshangbin/LazyPage](https://github.com/fengshangbin/LazyPage)
 
 # 现实问题
 
@@ -31,7 +31,7 @@ LazyPage 是一个前端框架，帮助前端人员高质量高效率完成前�
 
 # 在线示例
 
-http://lazypage-switch.fengshangbin.com/
+[http://lazypage-switch.fengshangbin.com/](http://lazypage-switch.fengshangbin.com/)
 
 # 如何使用
 
@@ -48,7 +48,7 @@ http://lazypage-switch.fengshangbin.com/
 注：Lazypage 使用了百度前端模板渲染的 JS  
 <%var name="Lisi"%>执行 JS 语句  
 <%=name%>输出变量  
-更多详情http://baidufe.github.io/BaiduTemplate/
+更多详情 [http://baidufe.github.io/BaiduTemplate/](http://baidufe.github.io/BaiduTemplate/)
 
 外部数据，外部模板
 
@@ -407,20 +407,16 @@ node server
 
 ### 5. 整合 webpack(热更新)
 
-参见 https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-webpack
+参见 [https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-webpack](https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-webpack)
 
 ### 6. 整合 gulp(热更新)
 
-参见 https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp
+参见 [https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp](https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp)
 
 # 后端整合
 
 LazyPage 的后端整合只需简单两部  
-1, java 请参见 https://github.com/fengshangbin/LazyPage-java  
-2, node.js 请参见 https://github.com/fengshangbin/LazyPage-node.js  
+1, java 请参见 [https://github.com/fengshangbin/LazyPage-java](https://github.com/fengshangbin/LazyPage-java)  
+2, node.js 请参见 [https://github.com/fengshangbin/LazyPage-node.js](https://github.com/fengshangbin/LazyPage-node.js)  
 3, c# 敬请期待  
 4, 其他欢迎大家共建
-
-# 许可
-
-MIT 许可
