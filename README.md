@@ -29,6 +29,10 @@ LazyPage 是一个前端框架，帮助前端人员高质量高效率完成前�
 4, 支持多页面间的切换动画。  
 5, 支持多层级的页面切换。
 
+# 在线示例
+
+http://lazypage-switch.fengshangbin.com/
+
 # 如何使用
 
 ### 1. 渲染数据
@@ -403,11 +407,11 @@ node server
 
 ### 5. 整合 webpack(热更新)
 
-参见https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-webpack
+参见 https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-webpack
 
 ### 6. 整合 gulp(热更新)
 
-参见https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp
+参见 https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp
 
 # 后端整合
 
