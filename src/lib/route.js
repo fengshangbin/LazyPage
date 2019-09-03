@@ -97,6 +97,9 @@ function checkPreLoad(container) {
     if (/^https?:\/\//i.test(url)) {
       continue;
     }
+    if (a[i].getAttribute('data-direct') == 'true') {
+      continue;
+    }
     urls.push(url);
   }
   startPreLoad(urls);
