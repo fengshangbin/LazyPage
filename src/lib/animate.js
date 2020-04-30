@@ -53,6 +53,7 @@ export function pageAnimate(current, target, options) {
       options.isBack = false;
     }
   }
+  makeNotEmpty(options.animate);
   if (typeof options.isBack == 'string') {
     /* if (options.isBack === 'auto') options.isBack = target.compareDocumentPosition(current) == 4;
     else options.isBack = options.isBack === 'true'; */

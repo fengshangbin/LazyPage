@@ -208,7 +208,31 @@ export function loadPage(url, callback, force) {
           finalePage.setAttribute('data-title', data.title.replace(/<\/?title>/gi, ''));
 
           let matchScripts = analyzeScript.extractCode(block);
-          var codes = matchScripts.codes;
+          analyzeScript.activeCodes(matchScripts, function() {
+            loadPageCallback(url, addTarget);
+          });
+          /* let len = matchScripts.length;
+          if (len > 0) {
+            for (let m = 0; m < len; m++) {
+              var js = matchScripts[m];
+              if (js.code) {
+                analyzeScript.evalScripts(js.code);
+                if (m == len) {
+                  loadPageCallback(url, addTarget);
+                }
+              } else if (js.src) {
+                analyzeScript.dynamicLoadJs(js.src, function() {
+                  if (m == len) {
+                    loadPageCallback(url, addTarget);
+                  }
+                });
+              }
+            }
+          } else {
+            loadPageCallback(url, addTarget);
+          } */
+
+          /* var codes = matchScripts.codes;
           var srcs = matchScripts.srcs;
           for (let m = 0, len = codes.length; m < len; m++) {
             analyzeScript.evalScripts(codes[m]);
@@ -226,7 +250,7 @@ export function loadPage(url, callback, force) {
           } else {
             loadPageCallback(url, addTarget);
             //callback(addTarget);
-          }
+          } */
         } else {
           loadPageCallback(url, null);
           //callback(null);
@@ -248,4 +272,5 @@ function loadPageCallback(key, lazypage) {
   for (var i = 0; i < callbacks.length; i++) {
     if (callbacks[i]) callbacks[i](lazypage);
   }
+  ajaxPageHistory[key] = null;
 }

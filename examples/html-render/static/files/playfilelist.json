@@ -1,0 +1,15 @@
+{
+  "timestamp": 1579410334,
+  "json": [
+    { "file": "/files/XML/20200119/ecbfc49f2b414ec1a705b265f093912a_0_1440.json", "dayOfWeek": 0 },
+    {
+      "file": "/files/XML/20200119/ecbfc49f2b414ec1a705b265f093912a_0_1440.json",
+      "dayOfWeek": 1
+    },
+    { "file": "/files/XML/20200122/ecbfc49f2b414ec1a705b265f093912a_0_1440.json", "dayOfWeek": 3 },
+    { "file": "/files/XML/20200123/ecbfc49f2b414ec1a705b265f093912a_0_1440.json", "dayOfWeek": 4 },
+    { "file": "/files/XML/20200124/ecbfc49f2b414ec1a705b265f093912a_0_1440.json", "dayOfWeek": 5 },
+    { "file": "/files/XML/20200125/ecbfc49f2b414ec1a705b265f093912a_0_1440.json", "dayOfWeek": 6 }
+  ],
+  "video": [{ "file": "/files/playfiles/285/2B8E1909DD7D408BB5A77E02B7F4A72A.MP4" }]
+}

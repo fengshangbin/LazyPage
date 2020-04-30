@@ -15,7 +15,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
     }),
-    new CopyPlugin([{ from: 'src/include', to: 'include' }]),
+    new CopyPlugin([{ from: 'src/include', to: 'include' }, { from: 'src/config.json', to: 'config.json' }, { from: 'src/js/format.js', to: 'js/format.js' }]),
     new HtmlWebpackPlugin({
       template: './src/$-.html', //模板文件地址
       filename: '$-.html', //文件名，默认为index.html（路径相对于output.path的值）

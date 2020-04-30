@@ -26,5 +26,9 @@
     "gulp-uglify": "^3.0.2",
     "gulp-watch": "^5.0.1",
     "lazypage-node": "^1.2.0"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "Android >= 4.0"
+  ]
 }
