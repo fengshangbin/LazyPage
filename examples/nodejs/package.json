@@ -1,0 +1,16 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "LazyPage example for node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node app.js"
+  },
+  "author": "fengshangbin",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "lazypage-node": "^1.2.0"
+  }
+}

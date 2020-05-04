@@ -1,7 +1,7 @@
 npm install --save-dev webpack webpack-cli
-npm install --save-dev babel-loader babel-core babel-preset-env
+npm install --save-dev babel-loader @babel/core @babel/preset-env
 npm install --save-dev html-webpack-plugin html-loader
-npm install --save-dev mini-css-extract-plugin style-loader css-loader less-loader postcss-loader autoprefixer
+npm install --save-dev mini-css-extract-plugin style-loader css-loader less less-loader postcss-loader autoprefixer
 npm install --save-dev url-loader file-loader
 npm install --save-dev clean-webpack-plugin
 npm install --save-dev webpack-dev-server lazypage-node

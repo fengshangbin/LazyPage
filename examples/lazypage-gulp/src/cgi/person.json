@@ -1,7 +1,5 @@
 {
-  "name": "Krasimir Tsonev",
-  "profile": {
-    "age": 29,
-    "photo": "images/love.jpg"
-  }
+	"name": "zhangsan",
+	"age": 19,
+	"color": "green"
 }

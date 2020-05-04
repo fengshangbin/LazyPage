@@ -1,0 +1,14 @@
+{
+  "config": {
+  	"api": "http://192.168.1.1",
+    "root": "/java"
+  },
+  "import": ["js/format.js"],
+  "mapping": [
+    {
+      "from": "http://localhost:8080",
+      "to": "http://localhost:8080/java"
+    }
+  ],
+  "ignorePath": "/java"
+}

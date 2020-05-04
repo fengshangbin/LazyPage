@@ -50,7 +50,7 @@ var app = express();
 app.use(serverFilter.filter('src'));
 app.use(express.static('src'));
 
-app.listen(7000, function() {});
+app.listen(9084, function() {});
 
 ```
 
@@ -75,9 +75,9 @@ gulp.task('browserSync', function(cb) {
   }).on('start', function() {
     browserSync.init(
       {
-        proxy: 'http://localhost:7000',
+        proxy: 'http://localhost:9084',
         //files: ['src/**/*.less', 'src/**/*.html', 'src/**/*.js'],
-        port: 8183
+        port: 8084
       },
       function() {
         console.log('browser refreshed.');
@@ -255,7 +255,8 @@ npm install --save-dev gulp-uglify
 var uglify = require('gulp-uglify');
 gulp.task('js', function() {
   return gulp
-    .src(['dist/rev/**/*.json', 'src/**/*.js'])
+    //排除后端渲染的js文件
+    .src(['dist/rev/**/*.json', 'src/**/*.js', "!src/js/format.js"])
     .pipe(
       revCollector({
         replaceReved: true
@@ -340,6 +341,8 @@ gulp.task('clean', function(cb) {
 ```
 gulp.task('copy', function(cb) {
   gulp.src('src/**/*.{mp4,pdf,ico,woff2,woff,ttf}').pipe(gulp.dest('dist'));
+  //单独拷贝后端渲染js文件
+  gulp.src("src/js/format.js").pipe(gulp.dest("dist/js"));
   cb();
 });
 ```

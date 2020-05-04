@@ -1,8 +1,8 @@
-import '../css/lazypage.css';
-import '../css/two.less';
-const LazyPage = require('./lazypage.js');
+import "../css/lazypage.css";
+import "../css/two.less";
+const LazyPage = require("./lazypage.js");
 
-console.log(LazyPage);
+//console.log(LazyPage);
 LazyPage.addEventListener(LazyPage.PageEvent.PAGE_FIRST_IN, test);
 LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_START, test);
 LazyPage.addEventListener(LazyPage.PageEvent.PAGE_IN_END, test);
