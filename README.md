@@ -98,7 +98,7 @@ GitHub Pages: [https://github.com/fengshangbin/LazyPage-switch](https://github.c
 }
 ```
 
-config 是全局配置变量 调用: \$config.api
+config 是全局配置变量 调用: \$config.api  
 import 是加载全局函数 调用: \$import.format.toThousands 其中 toThousands 是外载 format.js 中定义的函数名
 
 ### 7. 使用地址栏参数
