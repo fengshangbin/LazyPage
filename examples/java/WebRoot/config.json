@@ -10,5 +10,6 @@
       "to": "http://localhost:8080/java"
     }
   ],
-  "ignorePath": "/java"
+  "ignorePath": "/java",
+  "debug": true
 }

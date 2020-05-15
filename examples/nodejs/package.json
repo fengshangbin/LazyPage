@@ -11,6 +11,6 @@
   "license": "MIT",
   "devDependencies": {
     "express": "^4.17.1",
-    "lazypage-node": "^1.2.0"
+    "lazypage-node": "^1.3.0"
   }
 }

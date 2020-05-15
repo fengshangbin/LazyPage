@@ -1,8 +1,8 @@
-var express = require("express");
-var serverFilter = require("lazypage-node");
+var express = require('express');
+var lazypage = require('lazypage-node');
 
 var app = express();
-app.use(serverFilter.filter("src"));
-app.use(express.static("src"));
+app.use(lazypage.filter('src'));
+app.use(express.static('src'));
 
-app.listen(9084, function () {});
+app.listen(9084, function() {});

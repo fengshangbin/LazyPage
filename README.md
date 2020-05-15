@@ -29,7 +29,7 @@ GitHub Pages: [https://github.com/fengshangbin/LazyPage-switch](https://github.c
 
 # 在线示例
 
-[http://lazypage-switch.fengshangbin.com/](http://lazypage-switch.fengshangbin.com/)
+[https://www.fengshangbin.com/java/lazypage/](https://www.fengshangbin.com/java/lazypage/)
 
 # 如何使用
 
