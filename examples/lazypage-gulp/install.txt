@@ -1,0 +1,11 @@
+npm install --save-dev gulp
+npm install --save-dev lazypage-node express
+npm install --save-dev browser-sync gulp-nodemon
+npm install --save-dev gulp-less
+npm install --save-dev gulp-autoprefixer
+npm install --save-dev gulp-watch
+npm install --save-dev gulp-rev gulp-rev-collector
+npm install --save-dev gulp-clean-css
+npm install --save-dev gulp-uglify
+npm install --save-dev gulp-htmlmin
+npm install --save-dev del

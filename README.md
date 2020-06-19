@@ -22,11 +22,6 @@ LazyPage 是一个前端开发框架，通过接入后端 LazyPage 插件实现�
 2, 前端采用模板渲染数据的方式，可以简单引用外部模板文件，简化代码，不用写一堆重复代码了。  
 3, 模板脚本直接运行 JS 语言，不需要额外再学习一套模板语言。
 
-# 关于 LazyPage-switch
-
-LazyPage-switch 让多页也可以像单页一样做页面切换动画  
-GitHub Pages: [https://github.com/fengshangbin/LazyPage-switch](https://github.com/fengshangbin/LazyPage-switch)
-
 # 在线示例
 
 [https://www.fengshangbin.com/node/lazypage/](https://www.fengshangbin.com/node/lazypage/)
@@ -129,10 +124,10 @@ npm install --save-dev express
 
 ```
 var express = require('express');
-var serverFilter = require('lazypage-node');
+var lazypage = require('lazypage-node');
 
 var app = express();
-app.use(serverFilter.filter('src')); // src为当前项目前端代码目录
+app.use(lazypage.filter('src')); // src为当前项目前端代码目录
 app.use(express.static('src'));
 
 app.listen(8181, function() {
