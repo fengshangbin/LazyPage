@@ -1,5 +1,10 @@
-<link href="/css/lazypage-switch.css" rel="stylesheet" type="text/css" />
-<script src="/js/lazypage-switch.js"></script>
+<% var root = $config.root %>
+<link
+  :href="root+'/css/lazypage-switch.css'"
+  rel="stylesheet"
+  type="text/css"
+/>
+<script :src="root+'/js/lazypage-switch.js'"></script>
 <style>
   ul {
     display: inline-block;
@@ -35,9 +40,10 @@
     line-height: 300px;
   }
 </style>
-<% var root = $config.root %>
 <ul>
-  <li class="title"><a href="https://www.fengshangbin.com">blog</a></li>
+  <li class="title">
+    <a href="https://www.fengshangbin.com" data-direct="true">blog</a>
+  </li>
   <li><a :href="root+'/'">a (slide)</a></li>
   <li><a :href="root+'/b'">b (fade)</a></li>
   <li><a :href="root+'/c'">c (pop)</a></li>
