@@ -4,6 +4,7 @@ var autoprefixer = require("gulp-autoprefixer");
 var minifycss = require("gulp-clean-css");
 var uglify = require("gulp-uglify");
 var browserSync = require("browser-sync");
+var getPort = require("get-port");
 var del = require("del");
 var htmlmin = require("gulp-htmlmin");
 var nodemon = require("gulp-nodemon");
@@ -12,28 +13,33 @@ var rev = require("gulp-rev");
 var revCollector = require("gulp-rev-collector");
 
 var browserSync = require("browser-sync").create();
-
 gulp.task("browserSync", function (cb) {
-  nodemon({
-    script: "server.js",
-    //ignore: ["gulpfile.js", "node_modules/", "public/**/*.*"],
-    ext: "html",
-    env: {
-      NODE_ENV: "development",
-    },
-  }).on("start", function () {
-    browserSync.init(
-      {
-        proxy: "http://localhost:9084",
-        //files: ['src/**/*.less', 'src/**/*.html', 'src/**/*.js'],
-        port: 8084,
+  (async () => {
+    let port = await getPort({ port: getPort.makeRange(8080, 9000) });
+    let port2 = await getPort({ port: getPort.makeRange(9000, 10000) });
+    nodemon({
+      script: "server.js",
+      ignore: ["node_modules/"],
+      ext: "html",
+      env: {
+        NODE_ENV: "development",
+        PORT: port,
       },
-      function () {
-        console.log("browser refreshed.");
-      }
-    );
-    cb();
-  });
+    }).on("start", function () {
+      browserSync.init(
+        {
+          proxy: "http://localhost:" + port,
+          //files: ['src/**/*.less', 'src/**/*.html', 'src/**/*.js'],
+          port: port2,
+          ui: false,
+        },
+        function () {
+          console.log("browser refreshed.");
+        }
+      );
+      cb();
+    });
+  })();
 });
 gulp.task("less", function () {
   return gulp
