@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js --mode production",
     "server": "node server",
+    "export": "node export.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,7 +23,7 @@
     "file-loader": "^4.3.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
-    "lazypage-node": "^1.3.1",
+    "lazypage-node": "^1.4.1",
     "less": "^3.11.3",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.2",

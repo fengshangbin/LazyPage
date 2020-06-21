@@ -20,7 +20,8 @@ LazyPage 是一个前端开发框架，通过接入后端 LazyPage 插件实现�
 主要特点  
 1, 支持前后端彻底分离，前端可以自主任意定义页面地址，并且支持搜索引擎爬虫爬取完整网页内容。  
 2, 前端采用模板渲染数据的方式，可以简单引用外部模板文件，简化代码，不用写一堆重复代码了。  
-3, 模板脚本直接运行 JS 语言，不需要额外再学习一套模板语言。
+3, 模板脚本直接运行 JS 语言，不需要额外再学习一套模板语言。  
+4, 支持导出静态 html 文件，也可以后端整合 lazypage
 
 # 在线示例
 
@@ -152,6 +153,60 @@ node server
 ### 6. 整合 gulp(热更新)
 
 参见 [https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp](https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-gulp)
+
+# 导出静态文件
+
+lazypage 支持导出静态 html 文件，以支持在静态服务器上部署发行网站
+
+参见 [https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-webpack](https://github.com/fengshangbin/LazyPage/tree/master/examples/lazypage-webpack)
+
+### 1. 添加导出命令
+
+在 package.json 中，在 scripts 节点下添加命令
+
+```
+"export": "node export.js",
+```
+
+### 2. 添加 export.js
+
+在根目录创建 export.js 文件
+
+```
+var exportHTML = require("lazypage-node/export");
+
+exportHTML("dist", { assets: ["js", "css", "images"] });
+
+```
+
+dist: 导出静态文件的源目录，通常为编译后的 dist 目录  
+option: 导出选项，默认如下
+
+```
+{
+  assets: [],
+  indexPage: "/",
+  unlinkPage: [],
+}
+```
+
+assets: 静态资源目录  
+indexPage：默认搜索首页  
+unlinkPage：孤立的页面集
+
+### 3. 编译最新源文件
+
+```
+npm run build
+```
+
+### 4. 导出静态文件
+
+```
+npm run export
+```
+
+执行成功后会在个目录生成 export 文件夹
 
 # 后端整合
 

@@ -20,8 +20,8 @@ module.exports = {
       { from: "src/config.json", to: "config.json" },
     ]),
     new HtmlWebpackPlugin({
-      template: "./src/$-.html", //模板文件地址
-      filename: "$-.html", //文件名，默认为index.html（路径相对于output.path的值）
+      template: "./src/$.html", //模板文件地址
+      filename: "$.html", //文件名，默认为index.html（路径相对于output.path的值）
       inject: true, //script标签的位置，true/body为在</body>标签前，head为在<head>里，false表示页面不引入js文件
       hash: true, //是否为引入的js文件添加hash值
       chunks: ["commons", "one"], //页面里要引入的js文件，值对应的是entry里的key。省略参数会把entry里所有文件都引入
@@ -32,8 +32,8 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: "./src/$+$-.html",
-      filename: "$+$-.html",
+      template: "./src/$+$.html",
+      filename: "$+$.html",
       inject: true,
       hash: true,
       chunks: ["commons", "two"],
