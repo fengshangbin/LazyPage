@@ -1,5 +1,5 @@
-import "../css/lazypage-switch.css";
+import "../css/lazyswitch.css";
 import "../css/one.less";
-const LazyPage = require("./lazypage-switch.js");
+const LazySwitch = require("./lazyswitch.js");
 
-LazyPage.openPreLoad();
+LazySwitch.openPreLoad();

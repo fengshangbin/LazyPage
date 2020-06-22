@@ -15,7 +15,7 @@
   <block>
     <% var path= $path(1) || "1"; %>
     <div class="conatiner">
-      <div class="lazypage" :data-sort="$path(0)*10+path">
+      <div class="lazyswitch" :data-sort="$path(0)*10+path">
         <style>
           .conatiner [data-path="/{{$path(0)+'/'+path}}"] {
             background: <%="rgb("+ Math.floor(Math.random() * 256) + ","+ Math.floor(Math.random() * 256) + ","+ Math.floor(Math.random() * 256) + ")"%>;

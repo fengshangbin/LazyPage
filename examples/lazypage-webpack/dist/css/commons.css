@@ -1,108 +1,108 @@
 /*!
- *  lazypage-switch 
+ *  lazyswitch 
  *  by fengshangbin 2019-01-10 
- *  https://github.com/fengshangbin/LazyPage-switch 
+ *  https://github.com/fengshangbin/lazyswitch 
  *  for H5 page switch animation
  */
-.lazypage {
+.lazyswitch {
   left: 0;
   right: 0;
   width: 100%;
   height: 100%;
   position: absolute;
 }
-.lazypage.out {
+.lazyswitch.out {
   display: none;
 }
-.lazypage.in,
-.lazypage.out {
+.lazyswitch.in,
+.lazyswitch.out {
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
-.lazypage.slide.in,
-.lazypage.slide.out {
+.lazyswitch.slide.in,
+.lazyswitch.slide.out {
   -webkit-animation-timing-function: ease-out;
   animation-timing-function: ease-out;
   -webkit-animation-duration: 225ms;
   animation-duration: 225ms;
 }
-.lazypage.slide.in {
+.lazyswitch.slide.in {
   -webkit-animation-name: slideinfromright;
   animation-name: slideinfromright;
 }
-.lazypage.slide.out {
+.lazyswitch.slide.out {
   -webkit-animation-name: slideouttoleft;
   animation-name: slideouttoleft;
 }
-.lazypage.slide.reverse.in {
+.lazyswitch.slide.reverse.in {
   -webkit-animation-name: slideinfromleft;
   animation-name: slideinfromleft;
 }
-.lazypage.slide.reverse.out {
+.lazyswitch.slide.reverse.out {
   -webkit-animation-name: slideouttoright;
   animation-name: slideouttoright;
 }
-.lazypage.slidevertical.in,
-.lazypage.slidevertical.out {
+.lazyswitch.slidevertical.in,
+.lazyswitch.slidevertical.out {
   -webkit-animation-timing-function: ease-out;
   animation-timing-function: ease-out;
   -webkit-animation-duration: 225ms;
   animation-duration: 225ms;
 }
-.lazypage.slidevertical.in {
+.lazyswitch.slidevertical.in {
   -webkit-animation-name: slideinfrombottom;
   animation-name: slideinfrombottom;
 }
-.lazypage.slidevertical.out {
+.lazyswitch.slidevertical.out {
   -webkit-animation-name: slideouttotop;
   animation-name: slideouttotop;
 }
-.lazypage.slidevertical.reverse.in {
+.lazyswitch.slidevertical.reverse.in {
   -webkit-animation-name: slideinfromtop;
   animation-name: slideinfromtop;
 }
-.lazypage.slidevertical.reverse.out {
+.lazyswitch.slidevertical.reverse.out {
   -webkit-animation-name: slideouttobottom;
   animation-name: slideouttobottom;
 }
-.lazypage.fade.in,
-.lazypage.fade.out {
+.lazyswitch.fade.in,
+.lazyswitch.fade.out {
   -webkit-animation-timing-function: ease-out;
   animation-timing-function: ease-out;
   -webkit-animation-duration: 400ms;
   animation-duration: 400ms;
 }
-.lazypage.fade.in {
+.lazyswitch.fade.in {
   -webkit-animation-name: fadein;
   animation-name: fadein;
 }
-.lazypage.fade.out {
+.lazyswitch.fade.out {
   -webkit-animation-name: fadeout;
   animation-name: fadeout;
 }
-.lazypage.popup.in,
-.lazypage.popup.out {
+.lazyswitch.popup.in,
+.lazyswitch.popup.out {
   -webkit-animation-timing-function: ease-out;
   animation-timing-function: ease-out;
   -webkit-animation-duration: 225ms;
   animation-duration: 225ms;
 }
-.lazypage.popup.in {
+.lazyswitch.popup.in {
   -webkit-animation-name: slideinfrombottom;
   animation-name: slideinfrombottom;
 }
-.lazypage.popup.in:not(.reverse) {
+.lazyswitch.popup.in:not(.reverse) {
   z-index: 8;
 }
-.lazypage.popup.out {
+.lazyswitch.popup.out {
   -webkit-animation-name: withoutanimate;
   animation-name: withoutanimate;
 }
-.lazypage.popup.reverse.in {
+.lazyswitch.popup.reverse.in {
   -webkit-animation-name: withoutanimate;
   animation-name: withoutanimate;
 }
-.lazypage.popup.reverse.out {
+.lazyswitch.popup.reverse.out {
   -webkit-animation-name: slideouttobottom;
   animation-name: slideouttobottom;
   z-index: 8;
@@ -283,7 +283,7 @@
     transform: translateY(0);
   }
 }
-.lazypage-loading-mask {
+.lazyswitch-loading-mask {
   height: 100%;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.35);
@@ -292,7 +292,7 @@
   top: 0;
   z-index: 9;
 }
-.lazypage-loading-mask::after {
+.lazyswitch-loading-mask::after {
   content: ' ';
   width: 30px;
   height: 30px;

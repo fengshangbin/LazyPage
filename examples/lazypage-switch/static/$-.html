@@ -15,7 +15,7 @@
   <block>
     <% var path= $path(0) || "a"; %>
     <div class="conatiner">
-      <div :class="'lazypage '+(path=='a'?'in':'out')" data-animate="slide" data-path="/" data-title="a">
+      <div :class="'lazyswitch '+(path=='a'?'in':'out')" data-animate="slide" data-path="/" data-title="a">
         <style>
           .conatiner [data-title="a"] {
             background: green;
@@ -23,7 +23,7 @@
         </style>
         a
       </div>
-      <div :class="'lazypage '+(path=='b'?'in':'out')" data-animate="fade" data-path="/b" data-title="b">
+      <div :class="'lazyswitch '+(path=='b'?'in':'out')" data-animate="fade" data-path="/b.html" data-title="b">
         <style>
           .conatiner [data-title="b"] {
             background: blue;
@@ -31,7 +31,7 @@
         </style>
         b
       </div>
-      <div :class="'lazypage '+(path=='c'?'in':'out')" data-animate="popup" data-path="/c" data-title="c">
+      <div :class="'lazyswitch '+(path=='c'?'in':'out')" data-animate="popup" data-path="/c.html" data-title="c">
         <style>
           .conatiner [data-title="c"] {
             background: red;
@@ -41,9 +41,6 @@
       </div>
     </div>
   </block>
-  <script>
-    LazyPage.openPreLoad();
-  </script>
 </body>
 
 </html>

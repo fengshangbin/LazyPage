@@ -1,10 +1,6 @@
 <% var root = $config.root %>
-<link
-  :href="root+'/css/lazypage-switch.css'"
-  rel="stylesheet"
-  type="text/css"
-/>
-<script :src="root+'/js/lazypage-switch.js'"></script>
+<link :href="root+'/css/lazyswitch.css'" rel="stylesheet" type="text/css" />
+<script :src="root+'/js/lazyswitch.js'"></script>
 <style>
   ul {
     display: inline-block;
@@ -41,20 +37,42 @@
   }
 </style>
 <ul>
-  <li class="title">
-    <a href="https://www.fengshangbin.com" data-direct="true">blog</a>
-  </li>
+  <li class="title"><a href="https://www.fengshangbin.com">blog</a></li>
   <li><a :href="root+'/'">a (slide)</a></li>
-  <li><a :href="root+'/b'">b (fade)</a></li>
-  <li><a :href="root+'/c'">c (pop)</a></li>
+  <li><a :href="root+'/b.html'">b (fade)</a></li>
+  <li><a :href="root+'/c.html'">c (pop)</a></li>
 </ul>
 <ul>
-  <li><a :href="root+'/1/1'">1/1</a></li>
-  <li><a :href="root+'/1/2'">1/2</a></li>
-  <li><a :href="root+'/1/3'">1/3</a></li>
+  <li><a :href="root+'/1/1.html'">1/1</a></li>
+  <li><a :href="root+'/1/2.html'">1/2</a></li>
+  <li><a :href="root+'/1/3.html'">1/3</a></li>
 </ul>
 <ul>
-  <li><a :href="root+'/2/1'">2/1</a></li>
-  <li><a :href="root+'/2/2'">2/2</a></li>
-  <li><a :href="root+'/2/3'" data-history="false">2/3 (no history)</a></li>
+  <li><a :href="root+'/2/1.html'">2/1</a></li>
+  <li><a :href="root+'/2/2.html'">2/2</a></li>
+  <li><a :href="root+'/2/3.html'" data-history="false">2/3 (no history)</a></li>
 </ul>
+<script>
+  LazySwitch.setIgnorePath("/node/lazyswitch");
+  LazySwitch.openPreLoad();
+
+  LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_SWITCH_BEFORE, test);
+  LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_FIRST_IN, test);
+  LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_IN_START, test);
+  LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_IN_END, test);
+  LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_OUT_START, test);
+  LazySwitch.addEventListener(LazySwitch.PageEvent.PAGE_OUT_END, test);
+  function test(e) {
+    console.log(e);
+    if (e.type == LazySwitch.PageEvent.PAGE_SWITCH_BEFORE) {
+      //e.data.hello = true;
+      var from = e.data.from;
+      var to = e.data.to;
+      var fromPath = from.getAttribute("data-path");
+      var toPath = to.getAttribute("data-path");
+      if (fromPath.charAt(1) == toPath.charAt(1)) {
+        e.data.animate = "slidevertical";
+      }
+    }
+  }
+</script>
