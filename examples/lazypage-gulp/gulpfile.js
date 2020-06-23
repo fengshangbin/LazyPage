@@ -4,7 +4,7 @@ var autoprefixer = require("gulp-autoprefixer");
 var minifycss = require("gulp-clean-css");
 var uglify = require("gulp-uglify");
 var browserSync = require("browser-sync");
-var getPort = require("get-port");
+var portfinder = require('portfinder');
 var del = require("del");
 var htmlmin = require("gulp-htmlmin");
 var nodemon = require("gulp-nodemon");
@@ -15,8 +15,8 @@ var revCollector = require("gulp-rev-collector");
 var browserSync = require("browser-sync").create();
 gulp.task("browserSync", function (cb) {
   (async () => {
-    let port = await getPort({ port: getPort.makeRange(8080, 9000) });
-    let port2 = await getPort({ port: getPort.makeRange(9000, 10000) });
+    let port = await portfinder.getPortPromise({ port: 8080, stopPort: 9000 });
+    let port2 = await portfinder.getPortPromise({ port: 9000, stopPort: 10000 });
     nodemon({
       script: "server.js",
       ignore: ["node_modules/"],
