@@ -1,7 +1,6 @@
 npm install --save-dev gulp
 npm install --save-dev lazypage-node express
 npm install --save-dev browser-sync gulp-nodemon
-npm install --save-dev get-port
 npm install --save-dev gulp-less
 npm install --save-dev gulp-autoprefixer
 npm install --save-dev gulp-watch
