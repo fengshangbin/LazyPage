@@ -110,7 +110,7 @@ LazyPage 是一个前端开发框架，通过接入后端 LazyPage 插件实现�
 config 是全局配置变量 调用: \$config.api  
 import 是加载全局函数 调用: \$import.format.toThousands 其中 toThousands 是外载 format.js 中定义的函数名  
 ignorePath 网站最终发布域名可能会是一个子域名也可能是一个目录，这会影响到取 地址栏参数 \$path(index) 的结果，如果因为换个部署路径再去修改代码里每个 \$path(index) 里index的值，这很不合理。这时就要配置ignorePath，来忽略产生变化的访问路径前缀。  
-mapping 有时服务器端访问资源访问地址和对外客户端资源访问地址不一样，例如nginx转发，或者内网不可以域名访问。这时可以配置mapping，让程序动态替换资源访问地址。  
+mapping 有时服务器端访问资源地址和对外客户端访问资源地址不一样，例如nginx转发，或者内网不可以域名访问。这时可以配置mapping，让程序动态替换访问资源地址。  
 所有配置都是可选的，甚至允许没有config.json文件
 
 # 关于前端测试
