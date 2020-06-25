@@ -1,7 +1,4 @@
-//import "../css/lazyswitch.css";
-import "../css/one.less";
-//const LazySwitch = require("./lazyswitch.js");
-import {openPreLoad} from "lazyswitch";
+require("../css/one.less");
+const LazySwitch = require("lazyswitch");
 
-//LazySwitch.openPreLoad();
-openPreLoad();
+LazySwitch.openPreLoad();
