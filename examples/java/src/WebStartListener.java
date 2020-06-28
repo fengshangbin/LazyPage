@@ -2,7 +2,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.c3.lazypage.LazyPage;
+import com.fengshangbin.lazypage.LazyPage;
 
 public class WebStartListener implements ServletContextListener{
 
